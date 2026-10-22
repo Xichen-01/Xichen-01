@@ -181,8 +181,8 @@ def build_module(m, W, accent):
     tx = gx + 44
     parts.append(f'<text x="{tx}" y="{H/2+8}" font-size="{name_sz}" font-weight="700" '
                  f'letter-spacing="1.5" fill="{INK}">{esc(m["en"])}</text>')
-    w_en = len(m["en"]) * name_sz * 0.92 + 12
-    parts.append(f'<text x="{tx + w_en + 16}" y="{H/2+6}" font-size="{en_sz+2}" '
+    zh_x = tx + (208 if not small else 150)
+    parts.append(f'<text x="{zh_x}" y="{H/2+6}" font-size="{en_sz+2}" '
                  f'letter-spacing="2" fill="{DIM}">{esc(m["zh"])}</text>')
 
     # 分隔线 + 展开符

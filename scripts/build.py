@@ -193,72 +193,109 @@ def station(cx, cy, s=1.0):
 def build_hero(c, V):
     W = V["w"]
     small = W <= 800
-    H = 440 if not small else 360
+    H = 330 if not small else 260
     P = 56 if not small else 24
 
     parts = [f'<rect width="{W}" height="{H}" fill="{BASE}"/>',
              f'<circle cx="{W*0.14}" cy="{H*0.18}" r="{W*0.22}" fill="url(#glow2)"/>',
              constellation(W, H),
              meteors(W, H)]
-    parts.append(station(W - 300, 218, 0.92) if not small else station(W - 168, H - 96, 0.55))
 
     parts.append(f'<text x="{P}" y="{68 if not small else 46}" class="mono" font-size="11" '
                  f'letter-spacing="6" fill="{DIM}">{esc(c["latin"])}　·　ORBITAL STATION</text>')
-    ny = 196 if not small else 150
+    ny = 176 if not small else 140
     parts.append(f'<text x="{P-2}" y="{ny}" font-size="{V["name"]}" font-weight="700" '
                  f'letter-spacing="3" fill="{INK}">{esc(c["latin"])}</text>')
     parts.append(f'<text x="{P}" y="{ny+38}" font-size="{V["sub"]}" fill="{SUB}">'
                  f'{esc(c["name"])}　·　{esc(c["role"])}</text>')
     parts.append(f'<text x="{P}" y="{ny+68}" class="mono" font-size="{V["sub"]-4}" '
                  f'letter-spacing="1.5" fill="{MINT}" opacity="0.9">{esc(c["handle"])}</text>')
-    parts.append(f'<text x="{P}" y="{ny+104}" font-size="{V["sub"]-1}" fill="{DIM}" '
+    parts.append(f'<text x="{P}" y="{ny+102}" font-size="{V["sub"]-1}" fill="{DIM}" '
                  f'letter-spacing="0.3">{esc(c["tagline"])}</text>')
-
-    idx = "　".join(f'{m["id"]} {m["en"]}' for m in c["modules"])
-    parts.append(f'<text x="{P}" y="{H-34}" class="mono" font-size="10.5" letter-spacing="3.6" '
-                 f'fill="{DIM}" opacity="0.85">{esc(idx)}</text>')
+    parts.append(f'<text x="{P}" y="{H-26}" class="mono" font-size="10.5" letter-spacing="3.6" '
+                 f'fill="{DIM}" opacity="0.85">DOCKING MODULES BELOW　▼</text>')
 
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">'
             f'{DEFS}{"".join(parts)}</svg>')
 
 
-def build_module(m, W):
+def build_module(m, V, idx):
+    W = V["w"]
     small = W <= 800
-    H = 92 if not small else 80
-    P = 56 if not small else 24
-    name_sz = 26 if not small else 21
-    en_sz = 12.5 if not small else 11
+    H = 150 if not small else 132
+    sp = 560 if not small else 316
+    num = m["id"].split("-")[-1]
     cy = H / 2
+    name_sz = 25 if not small else 21
+    en_sz = 12 if not small else 11
 
-    parts = [
-        f'<rect x="0" y="0" width="{W}" height="{H}" rx="14" fill="{BASE}"/>',
-        f'<rect x="0.5" y="0.5" width="{W-1}" height="{H-1}" rx="14" fill="none" stroke="#ffffff" stroke-opacity="0.09"/>',
-        f'<rect x="0" y="14" width="2" height="{H-28}" rx="1" fill="url(#bar)"/>',
-        f'<text x="{P}" y="{cy+4}" class="mono" font-size="10.5" letter-spacing="1.6" '
-        f'fill="{MINT}" opacity="0.85">{esc(m["id"])}</text>',
-    ]
-    gx = P + 62
-    parts.append(f'<rect x="{gx}" y="{cy-12}" width="24" height="24" rx="6" fill="none" '
-                 f'stroke="{MINT}" stroke-opacity="0.5"/>')
-    parts.append(f'<circle cx="{gx+12}" cy="{cy}" r="2.6" fill="{MINT}" opacity="0.85"/>')
+    p_x = 64 if not small else 24
+    pod_x = sp + 200 if not small else sp + 132
+    pod_w = W - pod_x - (64 if not small else 24)
+    pod_h = 84 if not small else 74
 
-    tx = gx + 40
-    parts.append(f'<text x="{tx}" y="{cy+9}" font-size="{name_sz}" font-weight="700" '
-                 f'letter-spacing="2" fill="{INK}">{esc(m["en"])}</text>')
-    zh_x = tx + (215 if not small else 150)
-    parts.append(f'<text x="{zh_x}" y="{cy+6}" font-size="{en_sz}" letter-spacing="3" '
-                 f'fill="{DIM}">{esc(m["zh"])}</text>')
-    parts.append(f'<line x1="{zh_x + (60 if not small else 46)}" y1="{cy+22}" x2="{W-P-58}" y2="{cy+22}" '
-                 f'stroke="{CYAN}" stroke-opacity="0.24" stroke-dasharray="1 6"/>')
+    parts = [f'<rect width="{W}" height="{H}" fill="{BASE}"/>']
 
-    cx = W - P - 18
-    parts.append(f'<circle cx="{cx}" cy="{cy}" r="14" fill="none" stroke="{MINT}" stroke-opacity="0.35"/>')
-    parts.append(f'<path d="M{cx-5} {cy} H{cx+5} M{cx} {cy-5} V{cy+5}" stroke="{MINT}" '
-                 f'stroke-width="1.3" stroke-linecap="round" opacity="0.9"/>')
+    # 左侧编号
+    parts.append(f'<text x="{p_x}" y="{cy+22}" font-size="{72 if not small else 52}" font-weight="700" '
+                 f'fill="none" stroke="{CYAN}" stroke-opacity="0.35" stroke-width="1.2">'
+                 f'{num}</text>')
+    parts.append(f'<text x="{p_x+4}" y="{cy+52 if not small else cy+46}" font-size="{en_sz}" '
+                 f'letter-spacing="3" fill="{DIM}">{esc(m["zh"])}</text>')
+
+    # 主梁
+    parts.append(f'<line x1="{sp-6}" y1="0" x2="{sp-6}" y2="{H}" stroke="{MINT}" stroke-opacity="0.35"/>')
+    parts.append(f'<line x1="{sp+6}" y1="0" x2="{sp+6}" y2="{H}" stroke="{MINT}" stroke-opacity="0.35"/>')
+    y = 0
+    while y < H:
+        parts.append(f'<line x1="{sp-6}" y1="{y}" x2="{sp+6}" y2="{y+18}" stroke="{MINT}" stroke-opacity="0.18"/>')
+        parts.append(f'<line x1="{sp+6}" y1="{y}" x2="{sp-6}" y2="{y+18}" stroke="{MINT}" stroke-opacity="0.18"/>')
+        y += 18
+
+    # 旋转陀螺环
+    parts.append(f'<g transform="translate({sp},{cy})">'
+                 f'<ellipse rx="{66 if not small else 48}" ry="{20 if not small else 15}" fill="none" '
+                 f'stroke="{CYAN}" stroke-opacity="0.55" stroke-dasharray="16 10" '
+                 f'stroke-width="1.3">'
+                 f'<animate attributeName="stroke-dashoffset" from="0" to="-52" dur="3.2s" repeatCount="indefinite"/>'
+                 f'</ellipse>'
+                 f'<ellipse rx="{66 if not small else 48}" ry="{20 if not small else 15}" fill="none" '
+                 f'stroke="{MINT}" stroke-opacity="0.3" stroke-dasharray="26 14" '
+                 f'transform="rotate(62)" stroke-width="1">'
+                 f'<animate attributeName="stroke-dashoffset" from="0" to="-80" dur="5.5s" repeatCount="indefinite"/>'
+                 f'</ellipse>'
+                 f'<circle r="2.6" fill="{MINT}">'
+                 f'<animateMotion dur="6s" repeatCount="indefinite" '
+                 f'path="M {-66 if not small else -48},0 A {66 if not small else 48},{20 if not small else 15} 0 1,1 '
+                 f'{66 if not small else 48},0 A {66 if not small else 48},{20 if not small else 15} 0 1,1 '
+                 f'{-66 if not small else -48},0"/></circle>'
+                 f'</g>')
+
+    # 连接臂
+    parts.append(f'<line x1="{sp+6}" y1="{cy}" x2="{pod_x}" y2="{cy}" stroke="{MINT}" stroke-opacity="0.45"/>')
+    parts.append(f'<circle cx="{pod_x}" cy="{cy}" r="3" fill="{MINT}" opacity="0.9"/>')
+
+    # 舱体
+    parts.append(f'<rect x="{pod_x}" y="{cy-pod_h/2}" width="{pod_w}" height="{pod_h}" rx="10" '
+                 f'fill="{CARD}" stroke="#1E4159"/>')
+    parts.append(f'<rect x="{pod_x}" y="{cy-pod_h/2}" width="3" height="{pod_h}" rx="1.5" fill="url(#bar)"/>')
+    tx = pod_x + 26
+    parts.append(f'<text x="{tx}" y="{cy+9}" font-size="{name_sz}" font-weight="700" letter-spacing="2.5" '
+                 f'fill="{INK}">{esc(m["en"])}</text>')
+    parts.append(f'<text x="{tx + (176 if not small else 132)}" y="{cy+7}" font-size="{en_sz}" '
+                 f'letter-spacing="2.4" fill="{DIM}">{esc(m["zh"])}</text>')
+    parts.append(f'<line x1="{tx}" y1="{cy+24}" x2="{pod_x+pod_w-60}" y2="{cy+24}" '
+                 f'stroke="{CYAN}" stroke-opacity="0.18" stroke-dasharray="1 6"/>')
+
+    bx = pod_x + pod_w - 30
+    parts.append(f'<circle cx="{bx}" cy="{cy}" r="12" fill="none" stroke="{MINT}" stroke-opacity="0.4"/>')
+    parts.append(f'<path d="M{bx-4.5} {cy} H{bx+4.5} M{bx} {cy-4.5} V{cy+4.5}" stroke="{MINT}" '
+                 f'stroke-width="1.2" stroke-linecap="round" opacity="0.9"/>')
 
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">'
-            f'{DEFS}{"".join(parts)}</svg>')
-
+            f'{DEFS}'
+            f'<rect x="0" y="0" width="{W}" height="{H}" fill="{BASE}"/>'
+            f'{"".join(parts)}</svg>')
 
 def build_body(m, V):
     W, P = V["w"], V["pad"]
@@ -318,8 +355,8 @@ def main():
 
     for i, m in enumerate(c["modules"]):
         n = i + 1
-        (ASSETS / f"mod-{n}.svg").write_text(build_module(m, DESK["w"]), encoding="utf-8")
-        (ASSETS / f"mod-{n}-mobile.svg").write_text(build_module(m, MOB["w"]), encoding="utf-8")
+        (ASSETS / f"mod-{n}.svg").write_text(build_module(m, DESK, i + 1), encoding="utf-8")
+        (ASSETS / f"mod-{n}-mobile.svg").write_text(build_module(m, MOB, i + 1), encoding="utf-8")
         (ASSETS / f"body-{n}.svg").write_text(build_body(m, DESK), encoding="utf-8")
         (ASSETS / f"body-{n}-mobile.svg").write_text(build_body(m, MOB), encoding="utf-8")
 

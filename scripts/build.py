@@ -6,6 +6,7 @@
 """
 import json
 import math
+import re
 import hashlib
 from pathlib import Path
 
@@ -15,15 +16,15 @@ ASSETS = ROOT / "assets"
 BASE = "#05080F"
 CARD = "#070C16"
 INK = "#F4F8FF"
-EN_TXT = "#CBD8EA"
-ZH_TXT = "#8FA3BC"
+EN_TXT = "#D8E4F3"
+ZH_TXT = "#9DB0C7"
 SUB = "#A6B7D4"
 DIM = "#6B7F9E"
 MINT = "#5EEAD4"
 CYAN = "#38BDF8"
 VIOLET = "#8B9CF6"
 
-SANS = '"PingFang SC", "Microsoft YaHei", "Inter", "Noto Sans SC", sans-serif'
+SANS = '"Inter", "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif'
 
 DESK = dict(w=1200, name=64, sub=18, en=21, enlh=36, zh=16, zhlh=29, pad=64)
 MOB = dict(w=680, name=40, sub=14, en=17, enlh=29, zh=14, zhlh=25, pad=32)
@@ -35,6 +36,14 @@ def esc(s):
 
 def plain(s):
     return str(s).replace("**", "")
+
+
+def clean(s):
+    """去掉 markdown 语法，只留可读文字。"""
+    t = str(s)
+    t = re.sub(r"\[([^\]]+)\]\([^)]*\)", r"\1", t)
+    t = t.replace("`", "").replace("**", "").replace("*", "")
+    return t
 
 
 def chw(c, size):
@@ -330,18 +339,18 @@ def build_body(m, V):
     W, P = V["w"], V["pad"]
     small = W <= 800
     num = m["id"].split("-")[-1]
-    en_sz = 19 if small else 20
-    en_lh = 31 if small else 34
-    zh_sz = 14 if small else 16
-    zh_lh = 25 if small else 27
+    en_sz = 20 if small else 21
+    en_lh = 33 if small else 37
+    zh_sz = 15 if small else 17
+    zh_lh = 27 if small else 30
 
     parts = [
         f'<rect x="{P}" y="28" width="30" height="30" fill="none" stroke="#2E5A78"/>',
         f'<text x="{P+15}" y="{48.5}" text-anchor="middle" class="mono" font-size="12" '
         f'fill="{MINT}">{num}</text>',
-        f'<text x="{P+44}" y="{52}" font-size="22" font-weight="700" letter-spacing="2.5" '
+        f'<text x="{P+44}" y="{52}" font-size="24" font-weight="700" letter-spacing="2.2" '
         f'fill="{INK}">{esc(m["en"])}</text>',
-        f'<text x="{P+44+len(m["en"])*22*0.74+18}" y="{50}" font-size="12" letter-spacing="2.4" '
+        f'<text x="{P+44+len(m["en"])*24*0.74+30}" y="{50}" font-size="12" letter-spacing="2.4" '
         f'fill="{DIM}">{esc(m["zh"])}</text>',
         f'<line x1="{P}" y1="76" x2="{W-P}" y2="76" stroke="#1E4159"/>',
         f'<rect x="{P}" y="75" width="72" height="2" fill="url(#bar)"/>',
@@ -353,7 +362,7 @@ def build_body(m, V):
                      f'fill="{DIM}">PROFILE</text>')
         y += 30
         for para in m["body_en"]:
-            for ln in wrap(plain(para), W - 2 * P, en_sz):
+            for ln in wrap(clean(para), W - 2 * P, en_sz):
                 parts.append(f'<text x="{P}" y="{y}" font-size="{en_sz}" fill="{EN_TXT}">{esc(ln)}</text>')
                 y += en_lh
             y += 12
@@ -363,7 +372,7 @@ def build_body(m, V):
         parts.append(f'<text x="{P}" y="{y}" font-size="13" letter-spacing="2.4" fill="{DIM}">个人简介</text>')
         y += 28
         for para in m["body_zh"]:
-            for ln in wrap(plain(para), W - 2 * P, zh_sz):
+            for ln in wrap(clean(para), W - 2 * P, zh_sz):
                 parts.append(f'<text x="{P}" y="{y}" font-size="{zh_sz}" fill="{ZH_TXT}">{esc(ln)}</text>')
                 y += zh_lh
             y += 8
@@ -384,14 +393,14 @@ def build_body(m, V):
 
         yl = top + 42
         for para in m["body_en"]:
-            for ln in wrap(plain(para), left_w, en_sz):
+            for ln in wrap(clean(para), left_w, en_sz):
                 parts.append(f'<text x="{P}" y="{yl}" font-size="{en_sz}" fill="{EN_TXT}">{esc(ln)}</text>')
                 yl += en_lh
             yl += 14
 
         yr = top + 42
         for para in m["body_zh"]:
-            for ln in wrap(plain(para), right_w, zh_sz):
+            for ln in wrap(clean(para), right_w, zh_sz):
                 parts.append(f'<text x="{right_x}" y="{yr}" font-size="{zh_sz}" fill="{ZH_TXT}">{esc(ln)}</text>')
                 yr += zh_lh
             yr += 10
@@ -399,7 +408,7 @@ def build_body(m, V):
         y_end = max(yl, yr)
         parts.append(f'<line x1="{right_x - gap/2}" y1="{top-10}" x2="{right_x - gap/2}" y2="{y_end-8}" '
                      f'stroke="#1E4159"/>')
-        H = y_end + 26
+        H = y_end - 6
 
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">'
             f'{DEFS}'

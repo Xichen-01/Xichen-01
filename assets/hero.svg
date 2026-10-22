@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440" role="img" aria-label="李天成 · LI TIANCHENG · @Xichen-01 · 智能科学与技术 2026 级">
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440" role="img" aria-label="李天成 · LI TIANCHENG · @Xichen-01 · 智能科学与技术 2026 级">
   <title>李天成 / LI TIANCHENG — @Xichen-01</title>
 
   <defs>
@@ -30,11 +30,11 @@
 
     <style>
       text { font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif; }
-      .label  { font-size: 11px; font-weight: 600; letter-spacing: 3.2px; fill: #4F6B82; }
+      .label  { font-size: 12px; font-weight: 600; letter-spacing: 3.2px; fill: #4F6B82; }
       .name   { font-size: 88px; font-weight: 700; letter-spacing: 8px; fill: #F2F7FB; }
-      .latin  { font-size: 19px; font-weight: 500; letter-spacing: 8px; fill: #7E96AA; }
-      .handle { font-family: "JetBrains Mono", Consolas, monospace; font-size: 15px; letter-spacing: 1px; fill: #5EEAD4; }
-      .role   { font-size: 16px; letter-spacing: 1.5px; fill: #6E889E; }
+      .latin  { font-size: 21px; font-weight: 500; letter-spacing: 8px; fill: #7E96AA; }
+      .handle { font-family: "JetBrains Mono", Consolas, monospace; font-size: 17px; letter-spacing: 1px; fill: #5EEAD4; }
+      .role   { font-size: 20px; letter-spacing: 1.5px; fill: #6E889E; }
     </style>
   </defs>
 

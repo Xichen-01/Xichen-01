@@ -245,7 +245,7 @@ def section_diagram(c, V, y, parts):
         parts.append(f'<circle cx="{bus_x}" cy="{ys[0]}" r="2.4" fill="{BLUE}">'
                      f'<animate attributeName="cy" values="{ys[0]};{ys[-1]}" dur="4.5s" repeatCount="indefinite"/>'
                      f'<animate attributeName="opacity" values="0;1;1;0" dur="4.5s" repeatCount="indefinite"/></circle>')
-        return y + 24 + 3 * 104 + 6
+        return y + 24 + 3 * 104 + 34
 
     # 竖排
     me_w = W - 2 * P
@@ -255,7 +255,7 @@ def section_diagram(c, V, y, parts):
         parts.append(f'<line x1="{W/2}" y1="{yy}" x2="{W/2}" y2="{yy+26}" stroke="#2E5A78" marker-end="url(#arw)"/>')
         block(parts, P, yy + 26, me_w, 86, b["id"], b["name"], f'{b["desc"]}　·　{b["io"]}')
         yy += 112
-    return yy + 6
+    return yy + 44
 
 
 def section_contact(c, V, y, parts):

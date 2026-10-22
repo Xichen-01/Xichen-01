@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 449" width="680" height="449"><defs>
+  <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#5EEAD4"/><stop offset="1" stop-color="#38BDF8"/>
+  </linearGradient>
+  <linearGradient id="meteor" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
+    <stop offset="0.75" stop-color="#38BDF8" stop-opacity="0.55"/>
+    <stop offset="1" stop-color="#FFFFFF" stop-opacity="1"/>
+  </linearGradient>
+  <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0" stop-color="#5EEAD4" stop-opacity="0.35"/><stop offset="1" stop-color="#5EEAD4" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow2" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0" stop-color="#8B9CF6" stop-opacity="0.30"/><stop offset="1" stop-color="#8B9CF6" stop-opacity="0"/>
+  </radialGradient>
+  <style>
+    text { font-family: "PingFang SC", "Microsoft YaHei", "Inter", "Noto Sans SC", sans-serif; }
+    .mono { font-family: Consolas, "JetBrains Mono", monospace; }
+  </style>
+</defs><rect x="0" y="0" width="680" height="449" rx="14" fill="#070C16"/><rect x="0.5" y="0.5" width="679" height="448" rx="14" fill="none" stroke="#ffffff" stroke-opacity="0.07"/><text x="32" y="54" class="mono" font-size="10.5" letter-spacing="3.4" fill="#5EEAD4" opacity="0.75">M-01　·　ABOUT</text><text x="32" y="94" font-size="17" fill="#CBD8EA" letter-spacing="0.2">First-year student in Intelligent Science &amp; Technology. By day I</text><text x="32" y="123" font-size="17" fill="#CBD8EA" letter-spacing="0.2">write code; at night I wonder whether a machine can remember a</text><text x="32" y="152" font-size="17" fill="#CBD8EA" letter-spacing="0.2">person — and still recognise that light years later.</text><text x="32" y="197" font-size="17" fill="#CBD8EA" letter-spacing="0.2">So I'm building Shuguang: an AI that remembers, refuses, and</text><text x="32" y="226" font-size="17" fill="#CBD8EA" letter-spacing="0.2">slowly grows a self. I also work on vision, and on small tools that</text><text x="32" y="255" font-size="17" fill="#CBD8EA" letter-spacing="0.2">actually run.</text><line x1="32" y1="292" x2="648" y2="292" stroke="#5EEAD4" stroke-opacity="0.12"/><text x="32" y="336" font-size="14" fill="#8FA3BC" letter-spacing="0.4">2026 级智能科学与技术本科生。白天写代码，晚上想更远的事：机器能不能记住一个人，能不能在</text><text x="32" y="361" font-size="14" fill="#8FA3BC" letter-spacing="0.4">很久以后还认得那束光。</text><text x="32" y="396" font-size="14" fill="#8FA3BC" letter-spacing="0.4">所以我在做曙光——一个会记事、会拒绝、会慢慢长出自己样子的 AI。也做视觉，做小工具。</text></svg>

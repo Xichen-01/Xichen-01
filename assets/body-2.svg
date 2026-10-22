@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 421" width="1200" height="421"><defs>
+  <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#5EEAD4"/><stop offset="1" stop-color="#38BDF8"/>
+  </linearGradient>
+  <linearGradient id="meteor" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
+    <stop offset="0.75" stop-color="#38BDF8" stop-opacity="0.55"/>
+    <stop offset="1" stop-color="#FFFFFF" stop-opacity="1"/>
+  </linearGradient>
+  <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0" stop-color="#5EEAD4" stop-opacity="0.35"/><stop offset="1" stop-color="#5EEAD4" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow2" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0" stop-color="#8B9CF6" stop-opacity="0.30"/><stop offset="1" stop-color="#8B9CF6" stop-opacity="0"/>
+  </radialGradient>
+  <style>
+    text { font-family: "PingFang SC", "Microsoft YaHei", "Inter", "Noto Sans SC", sans-serif; }
+    .mono { font-family: Consolas, "JetBrains Mono", monospace; }
+  </style>
+</defs><rect x="0" y="0" width="1200" height="421" rx="14" fill="#070C16"/><rect x="0.5" y="0.5" width="1199" height="420" rx="14" fill="none" stroke="#ffffff" stroke-opacity="0.07"/><text x="64" y="54" class="mono" font-size="10.5" letter-spacing="3.4" fill="#5EEAD4" opacity="0.75">M-02　·　NOW</text><text x="64" y="94" font-size="21" fill="#CBD8EA" letter-spacing="0.2">Shuguang — memory and personality: it forgets, recalls, and answers you late at night.</text><text x="64" y="146" font-size="21" fill="#CBD8EA" letter-spacing="0.2">YOLO26 — chasing half a point of mAP through one ablation after another.</text><text x="64" y="198" font-size="21" fill="#CBD8EA" letter-spacing="0.2">story-forge — branching stories the reader walks through by choice.</text><line x1="64" y1="242" x2="1136" y2="242" stroke="#5EEAD4" stroke-opacity="0.12"/><text x="64" y="286" font-size="16" fill="#8FA3BC" letter-spacing="0.4">曙光 —— 给它记忆和人格：会忘，会想起，会在深夜回你一句。</text><text x="64" y="325" font-size="16" fill="#8FA3BC" letter-spacing="0.4">YOLO26 —— 在视觉里找那 0.5 个点的提升，一遍遍跑消融。</text><text x="64" y="364" font-size="16" fill="#8FA3BC" letter-spacing="0.4">story-forge —— 把故事写成分岔的路，让读的人自己选。</text></svg>

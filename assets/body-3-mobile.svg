@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 356" width="680" height="356"><defs>
+  <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#5EEAD4"/><stop offset="1" stop-color="#38BDF8"/>
+  </linearGradient>
+  <linearGradient id="meteor" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
+    <stop offset="0.75" stop-color="#38BDF8" stop-opacity="0.55"/>
+    <stop offset="1" stop-color="#FFFFFF" stop-opacity="1"/>
+  </linearGradient>
+  <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0" stop-color="#5EEAD4" stop-opacity="0.35"/><stop offset="1" stop-color="#5EEAD4" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow2" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0" stop-color="#8B9CF6" stop-opacity="0.30"/><stop offset="1" stop-color="#8B9CF6" stop-opacity="0"/>
+  </radialGradient>
+  <style>
+    text { font-family: "PingFang SC", "Microsoft YaHei", "Inter", "Noto Sans SC", sans-serif; }
+    .mono { font-family: Consolas, "JetBrains Mono", monospace; }
+  </style>
+</defs><rect x="0" y="0" width="680" height="356" rx="14" fill="#070C16"/><rect x="0.5" y="0.5" width="679" height="355" rx="14" fill="none" stroke="#ffffff" stroke-opacity="0.07"/><text x="32" y="54" class="mono" font-size="10.5" letter-spacing="3.4" fill="#5EEAD4" opacity="0.75">M-03　·　WORK</text><text x="32" y="94" font-size="17" fill="#CBD8EA" letter-spacing="0.2">[story-forge](https://github.com/Xichen-01/story-forge) — an</text><text x="32" y="123" font-size="17" fill="#CBD8EA" letter-spacing="0.2">interactive AI novel generator with branching choices. Read, pick a</text><text x="32" y="152" font-size="17" fill="#CBD8EA" letter-spacing="0.2">branch, and the plot follows.</text><text x="32" y="197" font-size="17" fill="#CBD8EA" letter-spacing="0.2">`Python` · `Flask` · `DeepSeek`</text><line x1="32" y1="234" x2="648" y2="234" stroke="#5EEAD4" stroke-opacity="0.12"/><text x="32" y="278" font-size="14" fill="#8FA3BC" letter-spacing="0.4">[story-forge](https://github.com/Xichen-01/story-forge) —— 交互式 AI 小说生成器，</text><text x="32" y="303" font-size="14" fill="#8FA3BC" letter-spacing="0.4">阅读中可选分支，剧情由你的选择决定。</text></svg>

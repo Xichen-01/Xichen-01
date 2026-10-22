@@ -1,74 +1,44 @@
 <div align="center">
-
-<img width="100%" alt="李天成 / LI TIANCHENG · @Xichen-01 · 智能科学与技术 2026 级" src="assets/hero.svg?v=1" />
-
+<picture>
+  <source media="(max-width: 640px)" srcset="assets/hero-mobile.svg?v=2" />
+  <img width="100%" alt="李天成 / LI TIANCHENG · @Xichen-01 · 智能科学与技术 2026 级" src="assets/hero.svg?v=2" />
+</picture>
 </div>
 
 <br/>
-
-## 关于我
-
-2026 级智能科学与技术本科生。现阶段在做两件事：把 C 和 Python 练到能独立写出东西，以及用大模型做一些真的能跑起来的小工具。
-
-比起堆功能，我更在意「这个东西为什么这样设计」。
-
-<details>
-<summary><b>🇬🇧 English</b></summary>
-
-<br/>
-
-First-year student in Intelligent Science & Technology, class of 2026. Right now I focus on two things: getting comfortable enough with C and Python to build on my own, and shipping small tools powered by large language models.
-
-More than piling up features, I care about *why* a thing is designed the way it is.
-
-</details>
-
----
-
-## 现在的状态
-
-- 🔭 **在做** — [story-forge](https://github.com/Xichen-01/story-forge)：带分支选择的 AI 小说生成器，Flask + DeepSeek
-- 🌱 **在学** — C 语言、Python、基础算法与数据结构
-- 🎯 **近期目标** — 把第一个项目收拾干净，然后开始给开源项目提 PR
-
----
-
-## 项目
 
 <div align="center">
-
-<a href="https://github.com/Xichen-01/story-forge">
-  <img width="100%" alt="story-forge — 交互式 AI 小说生成器，Python + Flask + DeepSeek" src="assets/project-story-forge.svg?v=1" />
-</a>
-
-</div>
-
-[代码](https://github.com/Xichen-01/story-forge) · [文档](https://github.com/Xichen-01/story-forge/tree/main/docs)
-
----
-
-## 找到我
-
-<div align="center">
-
-<a href="mailto:your-email@example.com"><img alt="Email" src="https://img.shields.io/badge/Email-EA4335?style=flat-square&logo=gmail&logoColor=white" /></a>
-<a href="https://github.com/Xichen-01"><img alt="GitHub" src="https://img.shields.io/badge/GitHub-Xichen--01-181717?style=flat-square&logo=github&logoColor=white" /></a>
-
+<picture>
+  <source media="(max-width: 640px)" srcset="assets/about-mobile.svg?v=2" />
+  <img width="100%" alt="关于我：2026 级智能科学与技术本科生。把 C 和 Python 练到能独立写出东西，用大模型做一些真的能跑起来的小工具。在做 story-forge，在学 C、Python 与算法，目标是提第一个开源 PR。" src="assets/about.svg?v=2" />
+</picture>
 </div>
 
 <br/>
 
-<div align="center"><sub>如果你也在学 AI，或者想一起做点什么，欢迎直接开 issue 找我。</sub></div>
+<div align="center">
+<picture>
+  <source media="(max-width: 640px)" srcset="assets/work-mobile.svg?v=2" />
+  <img width="100%" alt="项目：story-forge，交互式 AI 小说生成器，Python / Flask / DeepSeek" src="assets/work.svg?v=2" />
+</picture>
+</div>
+
+<br/>
+
+<div align="center">
+<picture>
+  <source media="(max-width: 640px)" srcset="assets/connect-mobile.svg?v=2" />
+  <img width="100%" alt="联系：邮箱 your-email@example.com，GitHub @Xichen-01" src="assets/connect.svg?v=2" />
+</picture>
+</div>
 
 <!--
-  ───────────────── 维护提示 ─────────────────
-  1. 头图是 assets/hero.svg，改名字/用户名直接搜索文件里的文字
-  2. 改完图片把 ?v=1 改成 ?v=2，否则 GitHub 图片缓存不刷新
-  3. 邮箱占位符 your-email@example.com 记得换成自己的
-  4. 想加贪吃蛇的话：把 .github/workflows/snake.yml 一起提交，
-     去 Actions 手动跑一次，成功后把下面这段的注释去掉
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Xichen-01/Xichen-01/output/github-snake-dark.svg" />
-    <img alt="contribution snake" src="https://raw.githubusercontent.com/Xichen-01/Xichen-01/output/github-snake.svg" />
-  </picture>
+  ───────────────── 维护说明 ─────────────────
+  页面由 4 组 SVG 组成，每组一个桌面版 + 一个移动版（≤640px 自动切换）：
+    hero.svg       / hero-mobile.svg       头图
+    about.svg      / about-mobile.svg      关于我 + 现在
+    work.svg       / work-mobile.svg       项目
+    connect.svg    / connect-mobile.svg    联系方式
+  改文字直接编辑对应 SVG；改完把所有 ?v=2 改成 ?v=3，否则 GitHub 图片缓存不刷新。
+  邮箱占位符 your-email@example.com 记得换成自己的。
 -->

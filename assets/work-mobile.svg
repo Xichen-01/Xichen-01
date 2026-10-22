@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 440" width="680" height="440" role="img" aria-label="项目：story-forge，交互式 AI 小说生成器，Python、Flask、DeepSeek">
+  <title>02 — 项目 / WORK</title>
+
+  <defs>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0A1725"/>
+      <stop offset="1" stop-color="#08121D"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5EEAD4"/>
+      <stop offset="0.55" stop-color="#38BDF8"/>
+      <stop offset="1" stop-color="#A78BFA"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5EEAD4"/>
+      <stop offset="1" stop-color="#A78BFA"/>
+    </linearGradient>
+
+    <style>
+      text { font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif; }
+      .label { font-size: 11px; font-weight: 600; letter-spacing: 3px; fill: #4F6B82; }
+      .repo  { font-size: 30px; font-weight: 700; fill: #F1F6FA; }
+      .desc  { font-size: 15px; fill: #7E96AA; }
+      .pill  { font-size: 10.5px; font-weight: 600; letter-spacing: 1.4px; fill: #7DD3FC; }
+    </style>
+  </defs>
+
+  <rect x="0.5" y="0.5" width="679" height="439" rx="16" fill="url(#panel)" stroke="#14304A"/>
+
+  <text x="36" y="56" class="label">02 — 项目 / WORK</text>
+  <rect x="36" y="72" width="32" height="2" fill="url(#accent)"/>
+
+  <rect x="36" y="96" width="608" height="300" rx="12" fill="#0B1926" stroke="#16324B"/>
+  <rect x="36" y="96" width="3.5" height="300" rx="1.75" fill="url(#edge)"/>
+
+  <text x="68" y="152" class="repo">story-forge</text>
+  <text x="68" y="186" class="desc">交互式 AI 小说生成器</text>
+  <text x="68" y="210" class="desc">阅读中选择分支，剧情由你的选择决定</text>
+
+  <g>
+    <rect x="68" y="240" width="78" height="24" rx="12" fill="#0C2436" stroke="#1B4B6B"/>
+    <text x="107" y="256" class="pill" text-anchor="middle">PYTHON</text>
+
+    <rect x="154" y="240" width="66" height="24" rx="12" fill="#0C2436" stroke="#1B4B6B"/>
+    <text x="187" y="256" class="pill" text-anchor="middle">FLASK</text>
+
+    <rect x="228" y="240" width="100" height="24" rx="12" fill="#0C2436" stroke="#1B4B6B"/>
+    <text x="278" y="256" class="pill" text-anchor="middle">DEEPSEEK</text>
+  </g>
+
+  <line x1="68" y1="300" x2="612" y2="300" stroke="#14304A"/>
+
+  <text x="68" y="340" class="desc">→ 代码 · 文档</text>
+
+  <g transform="translate(556,318)">
+    <circle cx="18" cy="18" r="18" fill="none" stroke="#1E4B73"/>
+    <path d="M11 25 L25 11 M15 11 H25 V21" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

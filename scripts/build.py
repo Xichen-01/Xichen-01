@@ -1,4 +1,11 @@
-﻿#!/usr/bin/env python3
+﻿def flow(W, H, m=24):
+    """沿边框跑的一小段光，给整页一点流动感。"""
+    return (f'<rect x="{m+1}" y="{m+1}" width="{W-2*m-2}" height="{H-2*m-2}" fill="none" '
+            f'stroke="url(#accent)" stroke-opacity="0.32" stroke-width="1.2" stroke-dasharray="10 130">'
+            f'<animate attributeName="stroke-dashoffset" from="0" to="-624" dur="14s" repeatCount="indefinite"/>'
+            f'</rect>')
+
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """把 content.json 渲染成一套「工程图纸」风格的 SVG + README。
 
@@ -122,7 +129,7 @@ def shell(W, H, inner):
             f'<rect width="{W}" height="{H}" fill="{BG}"/>'
             f'<rect width="{W}" height="{H}" fill="url(#g1)" opacity="0.5"/>'
             f'<rect width="{W}" height="{H}" fill="url(#g2)" opacity="0.45"/><rect width="{W}" height="{H}" fill="url(#lg)"/>'
-            f'{frame(W, H)}{inner}</svg>')
+            f'{frame(W, H)}{flow(W, H)}{inner}</svg>')
 
 
 def dim(x1, x2, y, label):
@@ -257,43 +264,50 @@ def build_about(c, V):
 
 def build_path(c, V):
     W, P = V["w"], V["pad"]
-    inner = W - 2 * P
-    y = 128
-    out, codes = [], []
+    rail_x = P + 24
+    text_x = P + (78 if V["stack"] else 104)
+    maxw = W - P - text_x
+    y = 152
+    out, nodes = [], []
 
-    for i, item in enumerate(c["path"]):
-        pad_in = 26
-        text_w = inner - pad_in * 2
-        lines = wrap(item["desc"], text_w, V["small"])
-        h = 62 + 30 + len(lines) * V["smalllh"] + 22
-        out.append(module(P, y, inner, h, f"M{i+1}"))
-        out.append(f'<text x="{P+pad_in}" y="{y+52}" class="mono">{esc(item["when"])}</text>')
-        out.append(f'<text x="{P+pad_in}" y="{y+90}" font-size="{V["h2"]}" font-weight="700" '
+    for item in c["path"]:
+        lines = wrap(item["desc"], maxw, V["small"])
+        out.append(f'<text x="{text_x}" y="{y+10}" class="mono">{esc(item["when"])}</text>')
+        out.append(f'<text x="{text_x}" y="{y+52}" font-size="{V["h2"]}" font-weight="700" '
                    f'fill="{INK}">{esc(item["title"])}</text>')
-        yy = y + 122
+        yy = y + 84
         for ln in lines:
-            out.append(f'<text x="{P+pad_in}" y="{yy}" font-size="{V["small"]}" fill="{MUTED}">{esc(ln)}</text>')
+            out.append(f'<text x="{text_x}" y="{yy}" font-size="{V["small"]}" fill="{MUTED}">{esc(ln)}</text>')
             yy += V["smalllh"]
-        codes.append((y, h))
-        y += h + 44
+        nodes.append(y + 8)
+        y = yy + 36
 
-    # 连接线与箭头
-    for i in range(len(codes) - 1):
-        y1 = codes[i][0] + codes[i][1]
-        y2 = codes[i + 1][0]
-        x = P + 20
-        out.append(f'<line x1="{x}" y1="{y1}" x2="{x}" y2="{y2-6}" stroke="#2E5A78"/>')
-        out.append(f'<path d="M{x-4} {y2-12} L{x} {y2-4} L{x+4} {y2-12}" fill="none" stroke="#2E5A78"/>')
+    rail_top, rail_bot = 118, (nodes[-1] + 44 if nodes else y)
+    out.insert(0, f'<line x1="{rail_x}" y1="{rail_top}" x2="{rail_x}" y2="{rail_bot}" '
+                  f'stroke="#2A5570" stroke-width="2.6"/>')
+    out.insert(1, f'<line x1="{rail_x}" y1="{rail_top}" x2="{rail_x}" y2="{rail_bot}" '
+                  f'stroke="url(#fadeDown)" stroke-width="2.4" stroke-dasharray="46 170">'
+                  f'<animate attributeName="stroke-dashoffset" from="0" to="-226" dur="3.4s" repeatCount="indefinite"/>'
+                  f'</line>')
 
-    if codes:
-        x = P + 20
-        out.append(f'<circle cx="{x}" cy="{codes[0][0]}" r="2.4" fill="{BLUE}">'
-                   f'<animate attributeName="cy" values="{codes[0][0]};{codes[-1][0]+codes[-1][1]}'
-                   f'" dur="7s" repeatCount="indefinite"/></circle>')
+    ty = rail_top
+    while ty < rail_bot:
+        out.append(f'<line x1="{rail_x-7}" y1="{ty}" x2="{rail_x+7}" y2="{ty}" stroke="#3A6A88" opacity="0.45"/>')
+        ty += 36
 
-    H = y + 12
+    for ny in nodes:
+        out.append(f'<circle cx="{rail_x}" cy="{ny}" r="10" fill="{BG}" stroke="#2E5A78"/>')
+        out.append(f'<circle cx="{rail_x}" cy="{ny}" r="3.6" fill="{ACCENT}"/>')
+        out.append(f'<circle cx="{rail_x}" cy="{ny}" r="3.6" fill="{ACCENT}" opacity="0.4">'
+                   f'<animate attributeName="r" values="3.6;15;3.6" dur="3.2s" repeatCount="indefinite"/>'
+                   f'<animate attributeName="opacity" values="0.4;0;0.4" dur="3.2s" repeatCount="indefinite"/></circle>')
+
+    out.append(f'<circle cx="{rail_x}" cy="{rail_top}" r="3" fill="#A5F3FC">'
+               f'<animate attributeName="cy" values="{rail_top};{rail_bot}" dur="6.5s" repeatCount="indefinite"/>'
+               f'<animate attributeName="opacity" values="0;1;1;0" dur="6.5s" repeatCount="indefinite"/></circle>')
+
+    H = y + 4
     return shell(W, H, header("02", "路径", "PATH", P, W) + "".join(out))
-
 
 def build_work(c, V):
     W, P = V["w"], V["pad"]

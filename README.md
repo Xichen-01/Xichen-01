@@ -2,35 +2,35 @@
 
 <div align="center">
 <picture>
-  <source media="(max-width: 640px)" srcset="assets/hero-mobile.svg?v=e7c878" />
-  <img width="100%" alt="李天成 · @Xichen-01" src="assets/hero.svg?v=e7c878" />
+  <source media="(max-width: 640px)" srcset="assets/hero-mobile.svg?v=fd8bb9" />
+  <img width="100%" alt="李天成 · @Xichen-01" src="assets/hero.svg?v=fd8bb9" />
 </picture>
 </div>
 
 <div align="center">
 <picture>
-  <source media="(max-width: 640px)" srcset="assets/about-mobile.svg?v=e7c878" />
-  <img width="100%" alt="关于我 ABOUT ME" src="assets/about.svg?v=e7c878" />
+  <source media="(max-width: 640px)" srcset="assets/about-mobile.svg?v=fd8bb9" />
+  <img width="100%" alt="关于我 ABOUT ME" src="assets/about.svg?v=fd8bb9" />
 </picture>
 </div>
 
 <div align="center">
 <picture>
-  <source media="(max-width: 640px)" srcset="assets/path-mobile.svg?v=e7c878" />
-  <img width="100%" alt="路径 PATH" src="assets/path.svg?v=e7c878" />
+  <source media="(max-width: 640px)" srcset="assets/path-mobile.svg?v=fd8bb9" />
+  <img width="100%" alt="路径 PATH" src="assets/path.svg?v=fd8bb9" />
 </picture>
 </div>
 
 <div align="center">
 <picture>
-  <source media="(max-width: 640px)" srcset="assets/work-mobile.svg?v=e7c878" />
-  <img width="100%" alt="项目 story-forge" src="assets/work.svg?v=e7c878" />
+  <source media="(max-width: 640px)" srcset="assets/work-mobile.svg?v=fd8bb9" />
+  <img width="100%" alt="项目 story-forge" src="assets/work.svg?v=fd8bb9" />
 </picture>
 </div>
 
 <div align="center">
 <picture>
-  <source media="(max-width: 640px)" srcset="assets/contact-mobile.svg?v=e7c878" />
-  <img width="100%" alt="联系方式 CONTACT" src="assets/contact.svg?v=e7c878" />
+  <source media="(max-width: 640px)" srcset="assets/contact-mobile.svg?v=fd8bb9" />
+  <img width="100%" alt="联系方式 CONTACT" src="assets/contact.svg?v=fd8bb9" />
 </picture>
 </div>

@@ -4,7 +4,6 @@
   "handle": "@Xichen-01",
   "role": "Intelligent Science & Technology · Class of 2026",
   "tagline": "Something that remembers, between the code and the dawn.",
-
   "modules": [
     {
       "id": "M-01",
@@ -53,11 +52,22 @@
       "zh": "联系",
       "open": false,
       "body_en": [
-        "GitHub — @Xichen-01　·　Email — your-email@example.com",
         "Always up for a conversation about memory, agents, or small ideas."
       ],
       "body_zh": [
         "想聊记忆、智能体或者任何小想法，随时找我。"
+      ],
+      "links": [
+        {
+          "k": "GITHUB",
+          "v": "@Xichen-01",
+          "href": "https://github.com/Xichen-01"
+        },
+        {
+          "k": "EMAIL",
+          "v": "1829541813@qq.com",
+          "href": "mailto:1829541813@qq.com"
+        }
       ]
     }
   ]

@@ -223,6 +223,8 @@ def build_hero(c, V):
                  f'letter-spacing="0.3">{esc(c["tagline"])}</text>')
     parts.append(f'<text x="{P}" y="{H-26}" class="mono" font-size="10.5" letter-spacing="3.6" '
                  f'fill="{DIM}" opacity="0.85">DOCKING MODULES BELOW　▼</text>')
+    parts.append(f'<text x="{W-P}" y="{H-26}" text-anchor="end" class="mono" font-size="10" '
+                 f'letter-spacing="3" fill="{DIM}" opacity="0.6">UPDATED 2026.10</text>')
 
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">'
             f'{DEFS}{"".join(parts)}</svg>')
@@ -356,8 +358,21 @@ def build_body(m, V):
         f'<rect x="{P}" y="75" width="72" height="2" fill="url(#bar)"/>',
     ]
 
+    link_h = 0
+    if m.get("links"):
+        ly = 122
+        for lk in m["links"]:
+            parts.append(f'<text x="{P}" y="{ly}" class="mono" font-size="10.5" letter-spacing="3" '
+                         f'fill="{DIM}">{lk["k"]}</text>')
+            parts.append(f'<text x="{P + (150 if not small else 110)}" y="{ly}" class="mono" '
+                         f'font-size="{18 if not small else 15}" fill="{INK}">{lk["v"]}</text>')
+            ly += 34
+            parts.append(f'<line x1="{P}" y1="{ly-14}" x2="{W-P}" y2="{ly-14}" stroke="#17324A"/>')
+            ly += 12
+        link_h = ly - 122
+
     if small:
-        y = 118
+        y = 118 + link_h
         parts.append(f'<text x="{P}" y="{y}" class="mono" font-size="10" letter-spacing="3.2" '
                      f'fill="{DIM}">PROFILE</text>')
         y += 30
@@ -383,7 +398,7 @@ def build_body(m, V):
         left_w = int((inner - gap) * 0.55)
         right_x = P + left_w + gap
         right_w = inner - left_w - gap
-        top = 122
+        top = 122 + link_h
 
         parts.append(f'<text x="{P}" y="{top}" class="mono" font-size="10" letter-spacing="3.2" '
                      f'fill="{DIM}">PROFILE</text>')
@@ -455,6 +470,9 @@ def main():
                    f'<source media="(max-width: 640px)" srcset="assets/body-{n}-mobile.svg?v={ver}" />'
                    f'<img width="100%" alt="{esc(" ".join(plain(p) for p in m["body_en"]))}" '
                    f'src="assets/body-{n}.svg?v={ver}" /></picture></div>')
+        if m.get("links"):
+            lnks = "　·　".join(f'[{lk["k"].title()}]({lk["href"]})' for lk in m["links"])
+            out.append(f'<sub>{lnks}</sub>')
         out.append("\n</details>\n")
 
     (ROOT / "README.md").write_text("\n".join(out), encoding="utf-8")

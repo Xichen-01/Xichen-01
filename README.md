@@ -2,13 +2,22 @@
 
 <div align="center">
 <picture>
+<<<<<<< HEAD
   <source media="(max-width: 640px)" srcset="assets/hero-mobile.svg?v=0c2495" />
   <img width="100%" alt="李天成 · Intelligent Science &amp; Technology · Class of 2026 · @Xichen-01" src="assets/hero.svg?v=0c2495" />
+=======
+  <source media="(max-width: 640px)" srcset="assets/hero-mobile.svg?v=70d9a9" />
+  <img width="100%" alt="李天成 · Intelligent Science &amp; Technology · Class of 2026 · @Xichen-01" src="assets/hero.svg?v=70d9a9" />
+>>>>>>> 7731e13 (fix: module title spacing)
 </picture>
 </div>
 
 <details open>
+<<<<<<< HEAD
 <summary><picture><source media="(max-width: 640px)" srcset="assets/mod-1-mobile.svg?v=0c2495" /><img width="100%" alt="M-01 关于 ABOUT" src="assets/mod-1.svg?v=0c2495" /></picture></summary>
+=======
+<summary><picture><source media="(max-width: 640px)" srcset="assets/mod-1-mobile.svg?v=70d9a9" /><img width="100%" alt="M-01 关于 ABOUT" src="assets/mod-1.svg?v=70d9a9" /></picture></summary>
+>>>>>>> 7731e13 (fix: module title spacing)
 
 First-year student in Intelligent Science & Technology. By day I write code; at night I wonder whether a machine can remember a person — and still recognise that light years later.
 
@@ -19,7 +28,11 @@ So I'm building Shuguang: an AI that remembers, refuses, and slowly grows a self
 </details>
 
 <details>
+<<<<<<< HEAD
 <summary><picture><source media="(max-width: 640px)" srcset="assets/mod-2-mobile.svg?v=0c2495" /><img width="100%" alt="M-02 在做 NOW" src="assets/mod-2.svg?v=0c2495" /></picture></summary>
+=======
+<summary><picture><source media="(max-width: 640px)" srcset="assets/mod-2-mobile.svg?v=70d9a9" /><img width="100%" alt="M-02 在做 NOW" src="assets/mod-2.svg?v=70d9a9" /></picture></summary>
+>>>>>>> 7731e13 (fix: module title spacing)
 
 **Shuguang** — memory and personality: it forgets, recalls, and answers you late at night.
 
@@ -32,7 +45,11 @@ So I'm building Shuguang: an AI that remembers, refuses, and slowly grows a self
 </details>
 
 <details>
+<<<<<<< HEAD
 <summary><picture><source media="(max-width: 640px)" srcset="assets/mod-3-mobile.svg?v=0c2495" /><img width="100%" alt="M-03 项目 WORK" src="assets/mod-3.svg?v=0c2495" /></picture></summary>
+=======
+<summary><picture><source media="(max-width: 640px)" srcset="assets/mod-3-mobile.svg?v=70d9a9" /><img width="100%" alt="M-03 项目 WORK" src="assets/mod-3.svg?v=70d9a9" /></picture></summary>
+>>>>>>> 7731e13 (fix: module title spacing)
 
 **[story-forge](https://github.com/Xichen-01/story-forge)** — an interactive AI novel generator with branching choices. Read, pick a branch, and the plot follows.
 
@@ -43,7 +60,11 @@ So I'm building Shuguang: an AI that remembers, refuses, and slowly grows a self
 </details>
 
 <details>
+<<<<<<< HEAD
 <summary><picture><source media="(max-width: 640px)" srcset="assets/mod-4-mobile.svg?v=0c2495" /><img width="100%" alt="M-04 联系 CONTACT" src="assets/mod-4.svg?v=0c2495" /></picture></summary>
+=======
+<summary><picture><source media="(max-width: 640px)" srcset="assets/mod-4-mobile.svg?v=70d9a9" /><img width="100%" alt="M-04 联系 CONTACT" src="assets/mod-4.svg?v=70d9a9" /></picture></summary>
+>>>>>>> 7731e13 (fix: module title spacing)
 
 GitHub — [@Xichen-01](https://github.com/Xichen-01)　·　Email — your-email@example.com
 

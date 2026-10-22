@@ -374,7 +374,7 @@ def main():
         for variant, suffix in ((DESKTOP, ""), (MOBILE, "-mobile")):
             (ASSETS / f"{name}{suffix}.svg").write_text(fn(c, variant), encoding="utf-8")
 
-    ver = hashlib.sha1((ROOT / "content.json").read_bytes() + (ROOT / "scripts" / "build.py").read_bytes()).hexdigest()[:6]
+    ver = hashlib.sha1((ROOT / "content.json").read_bytes() + (ROOT / "scripts" / "build.py").read_bytes() + (ROOT / "BUILD").read_bytes()).hexdigest()[:6]
     alts = {"hero": f'{c["name"]} · {c["handle"]}', "about": "关于我 ABOUT ME",
             "path": "路径 PATH", "work": f'项目 {c["work"]["name"]}',
             "contact": "联系方式 CONTACT"}

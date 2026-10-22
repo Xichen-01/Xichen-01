@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400" role="img" aria-label="李天成 LI TIANCHENG，GitHub 用户名 Xichen-01，智能科学与技术 2026 级">
+  <title>李天成 / LI TIANCHENG — @Xichen-01</title>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#040A12"/>
+      <stop offset="0.55" stop-color="#061523"/>
+      <stop offset="1" stop-color="#0A1E31"/>
+    </linearGradient>
+
+    <radialGradient id="glowA" cx="0.16" cy="0.18" r="0.62">
+      <stop offset="0" stop-color="#22D3EE" stop-opacity="0.30"/>
+      <stop offset="1" stop-color="#22D3EE" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="glowB" cx="0.86" cy="0.9" r="0.65">
+      <stop offset="0" stop-color="#8B5CF6" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#8B5CF6" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22D3EE"/>
+      <stop offset="0.55" stop-color="#60A5FA"/>
+      <stop offset="1" stop-color="#A78BFA"/>
+    </linearGradient>
+
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#1E3A5F" stroke-opacity="0.30" stroke-width="1"/>
+    </pattern>
+
+    <style>
+      text { font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif; }
+      .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 5px; fill: #67E8F9; }
+      .name    { font-size: 74px; font-weight: 700; letter-spacing: 3px; fill: #F8FAFC; }
+      .latin   { font-size: 17px; font-weight: 500; letter-spacing: 7px; fill: #94A3B8; }
+      .handle  { font-family: "JetBrains Mono", Consolas, monospace; font-size: 15px; letter-spacing: 1px; fill: #38BDF8; }
+      .tag     { font-size: 14px; letter-spacing: 2px; fill: #7C93A8; }
+    </style>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1200" height="400" fill="url(#bg)"/>
+  <rect width="1200" height="400" fill="url(#grid)"/>
+  <rect width="1200" height="400" fill="url(#glowA)">
+    <animate attributeName="opacity" values="0.75;1;0.75" dur="7s" repeatCount="indefinite"/>
+  </rect>
+  <rect width="1200" height="400" fill="url(#glowB)">
+    <animate attributeName="opacity" values="1;0.7;1" dur="9s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- 右侧粒子网络 -->
+  <g stroke="#38BDF8" stroke-width="1" opacity="0.20">
+    <line x1="900" y1="196" x2="826" y2="118"/>
+    <line x1="900" y1="196" x2="988" y2="102"/>
+    <line x1="900" y1="196" x2="1060" y2="172"/>
+    <line x1="900" y1="196" x2="1014" y2="272"/>
+    <line x1="900" y1="196" x2="902" y2="318"/>
+    <line x1="900" y1="196" x2="796" y2="272"/>
+    <line x1="900" y1="196" x2="756" y2="186"/>
+    <line x1="900" y1="196" x2="862" y2="214"/>
+    <line x1="900" y1="196" x2="952" y2="148"/>
+    <line x1="900" y1="196" x2="1020" y2="228"/>
+    <line x1="900" y1="196" x2="878" y2="266"/>
+    <line x1="826" y1="118" x2="952" y2="148"/>
+    <line x1="988" y1="102" x2="1060" y2="172"/>
+    <line x1="1014" y1="272" x2="1020" y2="228"/>
+    <line x1="796" y1="272" x2="878" y2="266"/>
+    <line x1="756" y1="186" x2="826" y2="118"/>
+  </g>
+
+  <g fill="#67E8F9">
+    <circle cx="900" cy="196" r="4.5" fill="#A78BFA"/>
+    <circle cx="826" cy="118" r="2.8"><animate attributeName="opacity" values="0.35;1;0.35" dur="4.2s" repeatCount="indefinite"/></circle>
+    <circle cx="988" cy="102" r="2.4"><animate attributeName="opacity" values="1;0.3;1" dur="5.1s" repeatCount="indefinite"/></circle>
+    <circle cx="1060" cy="172" r="3.2"/>
+    <circle cx="1014" cy="272" r="2.6"><animate attributeName="opacity" values="0.4;1;0.4" dur="3.6s" repeatCount="indefinite"/></circle>
+    <circle cx="902" cy="318" r="2.2"/>
+    <circle cx="796" cy="272" r="3.0"><animate attributeName="opacity" values="1;0.35;1" dur="6s" repeatCount="indefinite"/></circle>
+    <circle cx="756" cy="186" r="2.4"/>
+    <circle cx="862" cy="214" r="2.0"/>
+    <circle cx="952" cy="148" r="2.6"><animate attributeName="opacity" values="0.3;0.9;0.3" dur="4.8s" repeatCount="indefinite"/></circle>
+    <circle cx="1020" cy="228" r="2.2"/>
+    <circle cx="878" cy="266" r="2.4"/>
+  </g>
+
+  <!-- 扫描线 -->
+  <rect x="0" y="-60" width="1200" height="60" fill="url(#accent)" opacity="0.05">
+    <animate attributeName="y" values="-60;400" dur="8s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- 左侧文字 -->
+  <rect x="80" y="92" width="44" height="3" rx="1.5" fill="url(#accent)"/>
+  <text x="80" y="132" class="eyebrow">HELLO, WORLD</text>
+
+  <text x="78" y="222" class="name">李天成</text>
+  <text x="80" y="262" class="latin">LI TIANCHENG</text>
+
+  <text x="80" y="302" class="handle">@Xichen-01</text>
+
+  <text x="80" y="342" class="tag">智能科学与技术 · 2026 级　｜　AI × Software</text>
+
+  <!-- 底部渐变线 -->
+  <rect x="0" y="397" width="1200" height="3" fill="url(#accent)" opacity="0.75"/>
+</svg>

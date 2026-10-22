@@ -2,7 +2,7 @@
 
 <div align="center">
 <picture>
-  <source media="(max-width: 640px)" srcset="assets/sky-mobile.svg?v=d37d9f" />
-  <img width="100%" alt="李天成 · 智能科学与技术 · 2026 级 · @Xichen-01" src="assets/sky.svg?v=d37d9f" />
+  <source media="(max-width: 640px)" srcset="assets/glass-mobile.svg?v=50290b" />
+  <img width="100%" alt="李天成 · 智能科学与技术 · 2026 级 · @Xichen-01" src="assets/glass.svg?v=50290b" />
 </picture>
 </div>

@@ -224,88 +224,116 @@ def build_module(m, V, idx):
     small = W <= 800
     H = 150 if not small else 132
     sp = 560 if not small else 316
-    num = m["id"].split("-")[-1]
     cy = H / 2
-    name_sz = 25 if not small else 21
+    num = m["id"].split("-")[-1]
+    side = 1 if idx % 2 == 1 else -1
+    name_sz = 25 if not small else 20
     en_sz = 12 if not small else 11
-
-    p_x = 64 if not small else 24
-    pod_x = sp + 200 if not small else sp + 132
-    pod_w = W - pod_x - (64 if not small else 24)
+    P = 64 if not small else 24
     pod_h = 84 if not small else 74
+    pod_w = 380 if not small else 214
 
-    parts = [f'<rect width="{W}" height="{H}" fill="{BASE}"/>']
+    if side == 1:
+        pod_x = W - P - pod_w
+        arm_x1, arm_x2 = sp + 6, pod_x
+        num_x, num_anchor = P, "start"
+    else:
+        pod_x = P
+        arm_x1, arm_x2 = pod_x + pod_w, sp - 6
+        num_x, num_anchor = W - P, "end"
 
-    # 左侧编号
-    parts.append(f'<text x="{p_x}" y="{cy+22}" font-size="{72 if not small else 52}" font-weight="700" '
-                 f'fill="none" stroke="{CYAN}" stroke-opacity="0.35" stroke-width="1.2">'
-                 f'{num}</text>')
-    parts.append(f'<text x="{p_x+4}" y="{cy+52 if not small else cy+46}" font-size="{en_sz}" '
-                 f'letter-spacing="3" fill="{DIM}">{esc(m["zh"])}</text>')
+    parts = [f'<rect width="{W}" height="{H}" fill="{BASE}"/>',
+             f'<text x="{num_x}" y="{cy+20}" text-anchor="{num_anchor}" font-size="{72 if not small else 50}" '
+             f'font-weight="700" fill="none" stroke="{CYAN}" stroke-opacity="0.35" stroke-width="1.2">'
+             f'{num}</text>',
+             f'<text x="{num_x}" y="{cy+50}" text-anchor="{num_anchor}" font-size="{en_sz}" '
+             f'letter-spacing="3" fill="{DIM}">{esc(m["zh"])}</text>']
 
     # 主梁
-    parts.append(f'<line x1="{sp-6}" y1="0" x2="{sp-6}" y2="{H}" stroke="{MINT}" stroke-opacity="0.35"/>')
-    parts.append(f'<line x1="{sp+6}" y1="0" x2="{sp+6}" y2="{H}" stroke="{MINT}" stroke-opacity="0.35"/>')
+    parts.append(f'<line x1="{sp-6}" y1="0" x2="{sp-6}" y2="{H}" stroke="{MINT}" stroke-opacity="0.32"/>')
+    parts.append(f'<line x1="{sp+6}" y1="0" x2="{sp+6}" y2="{H}" stroke="{MINT}" stroke-opacity="0.32"/>')
     y = 0
     while y < H:
-        parts.append(f'<line x1="{sp-6}" y1="{y}" x2="{sp+6}" y2="{y+18}" stroke="{MINT}" stroke-opacity="0.18"/>')
-        parts.append(f'<line x1="{sp+6}" y1="{y}" x2="{sp-6}" y2="{y+18}" stroke="{MINT}" stroke-opacity="0.18"/>')
+        parts.append(f'<line x1="{sp-6}" y1="{y}" x2="{sp+6}" y2="{y+18}" stroke="{MINT}" stroke-opacity="0.16"/>')
+        parts.append(f'<line x1="{sp+6}" y1="{y}" x2="{sp-6}" y2="{y+18}" stroke="{MINT}" stroke-opacity="0.16"/>')
         y += 18
 
-    # 旋转陀螺环
-    parts.append(f'<g transform="translate({sp},{cy})">'
-                 f'<ellipse rx="{66 if not small else 48}" ry="{20 if not small else 15}" fill="none" '
-                 f'stroke="{CYAN}" stroke-opacity="0.55" stroke-dasharray="16 10" '
-                 f'stroke-width="1.3">'
-                 f'<animate attributeName="stroke-dashoffset" from="0" to="-52" dur="3.2s" repeatCount="indefinite"/>'
-                 f'</ellipse>'
-                 f'<ellipse rx="{66 if not small else 48}" ry="{20 if not small else 15}" fill="none" '
-                 f'stroke="{MINT}" stroke-opacity="0.3" stroke-dasharray="26 14" '
-                 f'transform="rotate(62)" stroke-width="1">'
-                 f'<animate attributeName="stroke-dashoffset" from="0" to="-80" dur="5.5s" repeatCount="indefinite"/>'
-                 f'</ellipse>'
-                 f'<circle r="2.6" fill="{MINT}">'
-                 f'<animateMotion dur="6s" repeatCount="indefinite" '
-                 f'path="M {-66 if not small else -48},0 A {66 if not small else 48},{20 if not small else 15} 0 1,1 '
-                 f'{66 if not small else 48},0 A {66 if not small else 48},{20 if not small else 15} 0 1,1 '
-                 f'{-66 if not small else -48},0"/></circle>'
-                 f'</g>')
+    # 每段不同的陀螺环 / 附件
+    if idx % 4 == 1:
+        rx, ry, rot = (66, 20, 0) if not small else (44, 14, 0)
+        parts.append(f'<ellipse cx="{sp}" cy="{cy}" rx="{rx}" ry="{ry}" fill="none" stroke="{CYAN}" '
+                     f'stroke-opacity="0.6" stroke-dasharray="16 10" stroke-width="1.3">'
+                     f'<animate attributeName="stroke-dashoffset" from="0" to="-52" dur="3.2s" repeatCount="indefinite"/></ellipse>')
+        parts.append(f'<ellipse cx="{sp}" cy="{cy}" rx="{rx}" ry="{ry}" fill="none" stroke="{MINT}" '
+                     f'stroke-opacity="0.28" stroke-dasharray="24 16" transform="rotate(62 {sp} {cy})">'
+                     f'<animate attributeName="stroke-dashoffset" from="0" to="-80" dur="5.5s" repeatCount="indefinite"/></ellipse>')
+    elif idx % 4 == 2:
+        rr = 30 if not small else 20
+        parts.append(f'<circle cx="{sp}" cy="{cy}" r="{rr}" fill="none" stroke="{CYAN}" stroke-opacity="0.6" '
+                     f'stroke-dasharray="12 8" stroke-width="1.4">'
+                     f'<animate attributeName="stroke-dashoffset" from="0" to="-40" dur="2.6s" repeatCount="indefinite"/></circle>')
+        parts.append(f'<circle cx="{sp}" cy="{cy}" r="{rr+10}" fill="none" stroke="{MINT}" stroke-opacity="0.22" '
+                     f'stroke-dasharray="3 9">'
+                     f'<animate attributeName="stroke-dashoffset" from="0" to="24" dur="7s" repeatCount="indefinite"/></circle>')
+        parts.append(f'<path d="M{sp-14} {cy-52} L{sp} {cy-34} L{sp+14} {cy-52} Z" fill="none" stroke="{MINT}" stroke-opacity="0.45"/>')
+    elif idx % 4 == 3:
+        rx, ry = (58, 14) if not small else (40, 10)
+        parts.append(f'<ellipse cx="{sp}" cy="{cy}" rx="{rx}" ry="{ry}" fill="none" stroke="{CYAN}" stroke-opacity="0.6" '
+                     f'stroke-dasharray="10 8"><animate attributeName="stroke-dashoffset" from="0" to="-36" '
+                     f'dur="4s" repeatCount="indefinite"/></ellipse>')
+        parts.append(f'<rect x="{sp-138 if not small else sp-92}" y="{cy-46}" width="{52 if not small else 36}" height="{20 if not small else 14}" '
+                     f'fill="none" stroke="{MINT}" stroke-opacity="0.4"/>')
+        parts.append(f'<line x1="{sp-86 if not small else sp-56}" y1="{cy-36}" x2="{sp-6}" y2="{cy-36}" stroke="{MINT}" stroke-opacity="0.3"/>')
+    else:
+        parts.append(f'<ellipse cx="{sp}" cy="{cy}" rx="{70 if not small else 46}" ry="{18 if not small else 12}" fill="none" '
+                     f'stroke="{CYAN}" stroke-opacity="0.55" stroke-dasharray="14 10">'
+                     f'<animate attributeName="stroke-dashoffset" from="0" to="-48" dur="3.8s" repeatCount="indefinite"/></ellipse>')
+        parts.append(f'<ellipse cx="{sp}" cy="{cy}" rx="{44 if not small else 30}" ry="{44 if not small else 30}" fill="none" '
+                     f'stroke="{MINT}" stroke-opacity="0.28" stroke-dasharray="4 10">'
+                     f'<animate attributeName="stroke-dashoffset" from="0" to="28" dur="9s" repeatCount="indefinite"/></ellipse>')
+        parts.append(f'<line x1="{sp}" y1="{cy-70 if not small else cy-48}" x2="{sp}" y2="{cy-104 if not small else cy-70}" '
+                     f'stroke="{MINT}" stroke-opacity="0.4"/>')
+        parts.append(f'<circle cx="{sp}" cy="{cy-104 if not small else cy-70}" r="2.6" fill="{MINT}">'
+                     f'<animate attributeName="opacity" values="0.2;1;0.2" dur="2.4s" repeatCount="indefinite"/></circle>')
 
-    # 连接臂
-    parts.append(f'<line x1="{sp+6}" y1="{cy}" x2="{pod_x}" y2="{cy}" stroke="{MINT}" stroke-opacity="0.45"/>')
-    parts.append(f'<circle cx="{pod_x}" cy="{cy}" r="3" fill="{MINT}" opacity="0.9"/>')
+    # 卫星绕轨
+    parts.append(f'<circle r="2.4" fill="{MINT}">'
+                 f'<animateMotion dur="{5 + idx}s" repeatCount="indefinite" '
+                 f'path="M {sp-(70 if not small else 48)},{cy} '
+                 f'a {70 if not small else 48},{18 if not small else 12} 0 1,0 {2*(70 if not small else 48)},0 '
+                 f'a {70 if not small else 48},{18 if not small else 12} 0 1,0 {-2*(70 if not small else 48)},0"/></circle>')
 
-    # 舱体
+    # 连接臂 + 舱体
+    parts.append(f'<line x1="{arm_x1}" y1="{cy}" x2="{arm_x2}" y2="{cy}" stroke="{MINT}" stroke-opacity="0.45"/>')
+    parts.append(f'<circle cx="{arm_x2}" cy="{cy}" r="3" fill="{MINT}" opacity="0.9"/>')
     parts.append(f'<rect x="{pod_x}" y="{cy-pod_h/2}" width="{pod_w}" height="{pod_h}" rx="10" '
                  f'fill="{CARD}" stroke="#1E4159"/>')
     parts.append(f'<rect x="{pod_x}" y="{cy-pod_h/2}" width="3" height="{pod_h}" rx="1.5" fill="url(#bar)"/>')
-    tx = pod_x + 26
+
+    tx = pod_x + 24
     parts.append(f'<text x="{tx}" y="{cy+9}" font-size="{name_sz}" font-weight="700" letter-spacing="2.5" '
                  f'fill="{INK}">{esc(m["en"])}</text>')
-    parts.append(f'<text x="{tx + (176 if not small else 132)}" y="{cy+7}" font-size="{en_sz}" '
+    parts.append(f'<text x="{tx + (176 if not small else 128)}" y="{cy+7}" font-size="{en_sz}" '
                  f'letter-spacing="2.4" fill="{DIM}">{esc(m["zh"])}</text>')
-    parts.append(f'<line x1="{tx}" y1="{cy+24}" x2="{pod_x+pod_w-60}" y2="{cy+24}" '
+    parts.append(f'<line x1="{tx}" y1="{cy+24}" x2="{pod_x+pod_w-58}" y2="{cy+24}" '
                  f'stroke="{CYAN}" stroke-opacity="0.18" stroke-dasharray="1 6"/>')
 
-    bx = pod_x + pod_w - 30
+    bx = pod_x + pod_w - 28
     parts.append(f'<circle cx="{bx}" cy="{cy}" r="12" fill="none" stroke="{MINT}" stroke-opacity="0.4"/>')
     parts.append(f'<path d="M{bx-4.5} {cy} H{bx+4.5} M{bx} {cy-4.5} V{cy+4.5}" stroke="{MINT}" '
                  f'stroke-width="1.2" stroke-linecap="round" opacity="0.9"/>')
 
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">'
-            f'{DEFS}'
-            f'<rect x="0" y="0" width="{W}" height="{H}" fill="{BASE}"/>'
-            f'{"".join(parts)}</svg>')
+            f'{DEFS}{"".join(parts)}</svg>')
 
 def build_body(m, V):
     W, P = V["w"], V["pad"]
     small = W <= 800
-    maxw = W - 2 * P
     num = m["id"].split("-")[-1]
     en_sz = 19 if small else 20
     en_lh = 31 if small else 34
     zh_sz = 14 if small else 16
-    zh_lh = 25 if small else 28
+    zh_lh = 25 if small else 27
 
     parts = [
         f'<rect x="{P}" y="28" width="30" height="30" fill="none" stroke="#2E5A78"/>',
@@ -319,31 +347,65 @@ def build_body(m, V):
         f'<rect x="{P}" y="75" width="72" height="2" fill="url(#bar)"/>',
     ]
 
-    y = 122
-    for para in m["body_en"]:
-        for ln in wrap(plain(para), maxw, en_sz):
-            parts.append(f'<text x="{P}" y="{y}" font-size="{en_sz}" fill="{EN_TXT}" '
-                         f'letter-spacing="0.2">{esc(ln)}</text>')
-            y += en_lh
-        y += 14
-
-    y += 4
-    parts.append(f'<line x1="{P}" y1="{y-12}" x2="{W-P}" y2="{y-12}" stroke="#17324A"/>')
-    y += 30
-    for para in m["body_zh"]:
-        for ln in wrap(plain(para), maxw, zh_sz):
-            parts.append(f'<text x="{P}" y="{y}" font-size="{zh_sz}" fill="{ZH_TXT}" '
-                         f'letter-spacing="0.6">{esc(ln)}</text>')
-            y += zh_lh
+    if small:
+        y = 118
+        parts.append(f'<text x="{P}" y="{y}" class="mono" font-size="10" letter-spacing="3.2" '
+                     f'fill="{DIM}">PROFILE</text>')
+        y += 30
+        for para in m["body_en"]:
+            for ln in wrap(plain(para), W - 2 * P, en_sz):
+                parts.append(f'<text x="{P}" y="{y}" font-size="{en_sz}" fill="{EN_TXT}">{esc(ln)}</text>')
+                y += en_lh
+            y += 12
         y += 8
+        parts.append(f'<line x1="{P}" y1="{y-10}" x2="{W-P}" y2="{y-10}" stroke="#17324A"/>')
+        y += 30
+        parts.append(f'<text x="{P}" y="{y}" font-size="13" letter-spacing="2.4" fill="{DIM}">个人简介</text>')
+        y += 28
+        for para in m["body_zh"]:
+            for ln in wrap(plain(para), W - 2 * P, zh_sz):
+                parts.append(f'<text x="{P}" y="{y}" font-size="{zh_sz}" fill="{ZH_TXT}">{esc(ln)}</text>')
+                y += zh_lh
+            y += 8
+        H = y + 16
+    else:
+        gap = 56
+        inner = W - 2 * P
+        left_w = int((inner - gap) * 0.55)
+        right_x = P + left_w + gap
+        right_w = inner - left_w - gap
+        top = 122
 
-    H = y + 14
+        parts.append(f'<text x="{P}" y="{top}" class="mono" font-size="10" letter-spacing="3.2" '
+                     f'fill="{DIM}">PROFILE</text>')
+        parts.append(f'<rect x="{P}" y="{top+10}" width="20" height="1.5" fill="{MINT}" opacity="0.5"/>')
+        parts.append(f'<text x="{right_x}" y="{top}" font-size="13" letter-spacing="2.6" fill="{DIM}">个人简介</text>')
+        parts.append(f'<rect x="{right_x}" y="{top+10}" width="20" height="1.5" fill="{CYAN}" opacity="0.4"/>')
+
+        yl = top + 42
+        for para in m["body_en"]:
+            for ln in wrap(plain(para), left_w, en_sz):
+                parts.append(f'<text x="{P}" y="{yl}" font-size="{en_sz}" fill="{EN_TXT}">{esc(ln)}</text>')
+                yl += en_lh
+            yl += 14
+
+        yr = top + 42
+        for para in m["body_zh"]:
+            for ln in wrap(plain(para), right_w, zh_sz):
+                parts.append(f'<text x="{right_x}" y="{yr}" font-size="{zh_sz}" fill="{ZH_TXT}">{esc(ln)}</text>')
+                yr += zh_lh
+            yr += 10
+
+        y_end = max(yl, yr)
+        parts.append(f'<line x1="{right_x - gap/2}" y1="{top-10}" x2="{right_x - gap/2}" y2="{y_end-8}" '
+                     f'stroke="#1E4159"/>')
+        H = y_end + 26
+
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">'
             f'{DEFS}'
             f'<rect x="0" y="0" width="{W}" height="{H}" rx="12" fill="{CARD}"/>'
             f'<rect x="0.5" y="0.5" width="{W-1}" height="{H-1}" rx="12" fill="none" '
             f'stroke="#1E4159" stroke-opacity="0.9"/>'
-            f'<path d="M1 {H-14} V{H-1} H14" fill="none" stroke="{MINT}" stroke-opacity="0.5"/>'
             f'{"".join(parts)}</svg>')
 
 def main():

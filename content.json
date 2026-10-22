@@ -10,7 +10,7 @@
       "id": "M-01",
       "en": "ABOUT",
       "zh": "关于",
-      "open": true,
+      "open": false,
       "body_en": [
         "First-year student in Intelligent Science & Technology. I keep wondering whether a machine can remember a person — and still recognise that light years later.",
         "So I'm building Shuguang: an AI that remembers, refuses, and slowly grows a self. Along the way I write small tools that actually run."

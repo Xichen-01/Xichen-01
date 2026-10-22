@@ -113,7 +113,7 @@ def header(num, zh, en, P, W, size=27):
             f'<text x="{P+48+tw(zh,size)+16}" y="64" class="mono">{esc(en)}</text>'
             f'<line x1="{P}" y1="96" x2="{W-P}" y2="96" stroke="{FRAME}"/>'
             f'<line x1="{P}" y1="92" x2="{P}" y2="100" stroke="{FRAME}"/>'
-            f'<line x1="{W-P}" y1="92" x2="{W-P}" y2="100" stroke="{FRAME}"/>')
+            f'<line x1="{W-P}" y1="92" x2="{W-P}" y2="100" stroke="{FRAME}"/>' f'<rect x="{P}" y="95.5" width="118" height="2" fill="url(#accent)"/>')
 
 
 def shell(W, H, inner):
@@ -221,7 +221,7 @@ def build_about(c, V):
         for ln in wrap(c["about_en"], inner, V["small"]):
             out.append(f'<text x="{P}" y="{y}" font-size="{V["small"]}" fill="{MUTED}">{esc(ln)}</text>')
             y += V["smalllh"]
-        H = y + 48
+        H = y + 34
         return shell(W, H, header("01", "关于我", "ABOUT ME", P, W) + "".join(out))
 
     left_w = int(inner * 0.5)
@@ -251,7 +251,7 @@ def build_about(c, V):
     out.append(f'<line x1="{div_x-5}" y1="{y0-8}" x2="{div_x+5}" y2="{y0-8}" stroke="{FRAME}"/>')
     out.append(f'<line x1="{div_x-5}" y1="{y_end-14}" x2="{div_x+5}" y2="{y_end-14}" stroke="{FRAME}"/>')
 
-    H = y_end + 46
+    H = y_end + 30
     return shell(W, H, header("01", "关于我", "ABOUT ME", P, W) + "".join(out))
 
 
@@ -265,7 +265,7 @@ def build_path(c, V):
         pad_in = 26
         text_w = inner - pad_in * 2
         lines = wrap(item["desc"], text_w, V["small"])
-        h = 74 + 30 + len(lines) * V["smalllh"] + 26
+        h = 62 + 30 + len(lines) * V["smalllh"] + 22
         out.append(module(P, y, inner, h, f"M{i+1}"))
         out.append(f'<text x="{P+pad_in}" y="{y+52}" class="mono">{esc(item["when"])}</text>')
         out.append(f'<text x="{P+pad_in}" y="{y+90}" font-size="{V["h2"]}" font-weight="700" '
@@ -324,7 +324,7 @@ def build_work(c, V):
                f'<rect x="0" y="0" width="30" height="30" fill="none" stroke="{FRAME}"/>'
                f'<path d="M9 21 L21 9 M12 9 H21 V18" fill="none" stroke="{ACCENT}" stroke-width="1.6"/></g>')
 
-    H = top + h + 40
+    H = top + h + 30
     return shell(W, H, header("03", "项目", "WORK", P, W) + "".join(out))
 
 

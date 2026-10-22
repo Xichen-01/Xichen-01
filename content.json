@@ -3,50 +3,28 @@
   "latin": "LI TIANCHENG",
   "handle": "@Xichen-01",
   "role": "智能科学与技术 · 2026 级",
-  "eyebrow": "DIGITAL IDENTITY / 2026",
-  "tagline": "在 AI 时代探索更多可能",
-  "tagline_en": "Exploring more possibilities in the AI era.",
-  "meta": ["KNOWLEDGE", "CODE", "BUILDING"],
+  "part": "LT-2026",
+  "rev": "D",
 
-  "about_cn": [
-    "2026 级智能科学与技术本科生。现阶段把 C 和 Python 练到能独立写出东西，同时用大模型做一些真的能跑起来的小工具。",
-    "比起堆功能，我更在意「这个东西为什么这样设计」。"
-  ],
-  "about_en": "First-year student in Intelligent Science & Technology. Getting fluent in C and Python, and building small tools on top of large language models. More than piling up features, I care about why a thing is designed the way it is.",
-
-  "path": [
-    {
-      "when": "2026 · 秋",
-      "title": "打地基",
-      "desc": "补计算机基础，写了一批小工具练手，把语法变成手感。"
-    },
-    {
-      "when": "现在 · 主线",
-      "title": "YOLO26 改进实验",
-      "desc": "在 YOLO26n 上试 2026 顶会里的模块，跑 3–4 组候选，用单模块消融看能不能撑住 +0.5 mAP。"
-    },
-    {
-      "when": "现在 · 支线",
-      "title": "曙光 · AI 人格与记忆",
-      "desc": "给一个 AI 做长期记忆和人格演化：记忆衰减、日记、内省、关系模型，接入 QQ 长期运行。"
-    },
-    {
-      "when": "现在 · 小工具",
-      "title": "story-forge",
-      "desc": "把大模型接进真实项目：Flask 做服务，DeepSeek 负责生成，做了分支剧情的交互。"
-    },
-    {
-      "when": "下一步",
-      "title": "第一个开源 PR",
-      "desc": "把手上的东西收拾干净，开始给别人的项目提 PR。"
-    }
+  "features": [
+    "2026 级智能科学与技术本科生，目前压在视觉和智能体两条线上。",
+    "在 YOLO26n 上试 2026 顶会里的模块，跑 3–4 组候选，只看单模块消融能不能撑住 +0.5 mAP。",
+    "在做一个会记事、有人格的 AI：记忆衰减、日记、内省、关系模型，接 QQ 长期跑。",
+    "顺手写工具，story-forge 用 Flask + DeepSeek 做分支剧情生成。"
   ],
 
-  "work": {
-    "name": "story-forge",
-    "desc": "交互式 AI 小说生成器。阅读过程中可以选分支，剧情走向由你的选择决定。",
-    "tags": ["Python", "Flask", "DeepSeek"]
-  },
+  "revisions": [
+    { "rev": "A", "date": "2026.09", "desc": "入学，补计算机基础，写小工具练手" },
+    { "rev": "B", "date": "2026.10", "desc": "YOLO26 改进实验立项，跑通云端训练与评测" },
+    { "rev": "C", "date": "2026.10", "desc": "曙光：人格与记忆系统接上 QQ" },
+    { "rev": "D", "date": "2026.10", "desc": "story-forge：把大模型接进真实项目" }
+  ],
+
+  "blocks": [
+    { "id": "U1", "name": "曙光", "desc": "人格 / 记忆", "io": "QQ" },
+    { "id": "U2", "name": "YOLO26", "desc": "视觉 / 消融", "io": "PyTorch" },
+    { "id": "U3", "name": "story-forge", "desc": "生成 / 交互", "io": "Flask" }
+  ],
 
   "contact": [
     { "k": "EMAIL", "v": "your-email@example.com" },

@@ -138,13 +138,17 @@ def build_hero(c, V):
     parts.append(f'<text x="{P}" y="{72 if not small else 52}" font-size="11.5" letter-spacing="6" '
                  f'fill="{DIM}">{esc(c["latin"])}　·　ORBITAL STATION</text>')
     ny = 200 if not small else 156
-    parts.append(f'<text x="{P-3}" y="{ny}" font-size="{V["name"]}" font-weight="700" '
-                 f'letter-spacing="4" fill="{INK}">{esc(c["name"])}</text>')
-    parts.append(f'<text x="{P}" y="{ny+36}" font-size="{V["sub"]}" fill="{SUB}">'
-                 f'{esc(c["role"])}　·　{esc(c["handle"])}</text>')
-    parts.append(f'<text x="{P}" y="{ny+70}" font-size="{V["sub"]}" fill="{DIM}">{esc(c["tagline"])}</text>')
+    big = 64 if not small else 40
+    parts.append(f'<text x="{P-2}" y="{ny}" font-size="{big}" font-weight="700" '
+                 f'letter-spacing="5" fill="{INK}">{esc(c["latin"])}</text>')
+    parts.append(f'<text x="{P}" y="{ny+38}" font-size="{V["sub"]+2}" fill="{SUB}">'
+                 f'{esc(c["name"])}　·　{esc(c["role"])}</text>')
+    parts.append(f'<text x="{P}" y="{ny+68}" font-size="{V["sub"]-2}" letter-spacing="1.5" '
+                 f'fill="{MINT}" opacity="0.85">{esc(c["handle"])}</text>')
+    parts.append(f'<text x="{P}" y="{ny+102}" font-size="{V["sub"]}" fill="{DIM}">{esc(c["tagline"])}</text>')
+    idx = "　".join(f'{m["id"]} {m["en"]}' for m in c["modules"])
     parts.append(f'<text x="{P}" y="{H-36}" font-size="11" letter-spacing="4" fill="{DIM}" opacity="0.8">'
-                 f'M-01 关于　M-02 在做　M-03 项目　M-04 联系</text>')
+                 f'{esc(idx)}</text>')
 
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">'
             f'{DEFS}{"".join(parts)}</svg>')
@@ -175,10 +179,11 @@ def build_module(m, W, accent):
 
     # 标题
     tx = gx + 44
-    parts.append(f'<text x="{tx}" y="{H/2+8}" font-size="{name_sz}" font-weight="700" fill="{INK}">'
-                 f'{esc(m["zh"])}</text>')
-    parts.append(f'<text x="{tx + len(m["zh"])*name_sz + 14}" y="{H/2+6}" font-size="{en_sz}" '
-                 f'letter-spacing="3.4" fill="{DIM}">{esc(m["en"])}</text>')
+    parts.append(f'<text x="{tx}" y="{H/2+8}" font-size="{name_sz}" font-weight="700" '
+                 f'letter-spacing="1.5" fill="{INK}">{esc(m["en"])}</text>')
+    w_en = len(m["en"]) * name_sz * 0.64
+    parts.append(f'<text x="{tx + w_en + 16}" y="{H/2+6}" font-size="{en_sz+2}" '
+                 f'letter-spacing="2" fill="{DIM}">{esc(m["zh"])}</text>')
 
     # 分隔线 + 展开符
     parts.append(f'<line x1="{tx}" y1="{H/2+18}" x2="{W-P-56}" y2="{H/2+18}" stroke="{accent}" '
@@ -226,10 +231,10 @@ def main():
                    f'<img width="100%" alt="{esc(m["id"])} {esc(m["zh"])} {esc(m["en"])}" '
                    f'src="assets/mod-{n}.svg?v={ver}" /></picture></summary>')
         out.append("")
-        for para in m["body_zh"]:
+        for para in m["body_en"]:
             out.append(para)
             out.append("")
-        out.append(f'*{" ".join(m["body_en"])}*')
+        out.append(f'<sub>{" ".join(m["body_zh"])}</sub>')
         out.append("")
         out.append("</details>")
         out.append("")

@@ -1,4 +1,4 @@
-﻿def flow(W, H, m=24):
+def flow(W, H, m=24):
     """沿边框跑的一小段光，给整页一点流动感。"""
     return (f'<rect x="{m+1}" y="{m+1}" width="{W-2*m-2}" height="{H-2*m-2}" fill="none" '
             f'stroke="url(#accent)" stroke-opacity="0.32" stroke-width="1.2" stroke-dasharray="10 130">'
@@ -365,7 +365,7 @@ def build_contact(c, V):
 
 
 def main():
-    c = json.loads((ROOT / "content.json").read_text(encoding="utf-8"))
+    c = json.loads((ROOT / "content.json").read_text(encoding="utf-8-sig"))
     ASSETS.mkdir(exist_ok=True)
 
     writers = {"hero": build_hero, "about": build_about, "path": build_path,

@@ -22,10 +22,10 @@ DIM = "#5B7A90"
 ACCENT = "#5EEAD4"
 BLUE = "#7DD3FC"
 
-DESK = dict(w=1200, pad=72, body=23, lh=37, small=18, smalllh=27,
-            h1=74, h2=30, name=74, latin=18, mono=12,
+DESK = dict(w=1200, pad=72, body=28, lh=42, small=21, smalllh=30,
+            h1=74, h2=34, name=88, latin=20, mono=13,
             stack=False, dia="row")
-MOB = dict(w=680, pad=36, body=21, lh=33, small=17, smalllh=26,
+MOB = dict(w=680, pad=36, body=24, lh=36, small=18, smalllh=27,
            h1=46, h2=24, name=62, latin=13, mono=11,
            stack=True, dia="col")
 

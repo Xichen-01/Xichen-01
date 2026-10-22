@@ -1,7 +1,4 @@
-﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 640" width="680" height="640" role="img" aria-label="关于我：2026 级智能科学与技术本科生，把 C 和 Python 练到能独立写出东西，用大模型做些能跑起来的小工具。现在在做 story-forge，在学 C、Python 与算法，目标是提第一个开源 PR。">
-  <title>01 — 关于 / ABOUT</title>
-
-  <defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 600" width="680" height="600"><defs>
     <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#0A1725"/>
       <stop offset="1" stop-color="#08121D"/>
@@ -11,39 +8,33 @@
       <stop offset="0.55" stop-color="#38BDF8"/>
       <stop offset="1" stop-color="#A78BFA"/>
     </linearGradient>
-
+    <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5EEAD4"/>
+      <stop offset="1" stop-color="#A78BFA"/>
+    </linearGradient>
+    <linearGradient id="pkt" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38BDF8" stop-opacity="0"/>
+      <stop offset="0.7" stop-color="#38BDF8" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#A5F3FC" stop-opacity="0.95"/>
+    </linearGradient>
     <style>
       text { font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif; }
-      .label { font-size: 11px; font-weight: 600; letter-spacing: 3px; fill: #4F6B82; }
-      .body  { font-size: 26px; fill: #DCE7F0; }
-      .en    { font-size: 14px; fill: #6E889E; }
-      .k     { font-size: 10.5px; font-weight: 600; letter-spacing: 2.4px; fill: #4A6478; }
-      .v     { font-size: 18px; fill: #C7D6E3; }
+      .label { font-size: 13px; font-weight: 600; letter-spacing: 3px; fill: #4F6B82; }
+      .body  { fill: #DCE7F0; }
+      .small { fill: #7E96AA; }
+      .k     { font-size: 15px; font-weight: 600; letter-spacing: 2.4px; fill: #4F6B82; }
+      .v     { fill: #C7D6E3; }
+      .h1    { font-weight: 700; fill: #F1F7FB; }
+      .tag   { font-size: 11px; font-weight: 600; letter-spacing: 1.4px; fill: #7DD3FC; }
     </style>
-  </defs>
-
-  <rect x="0.5" y="0.5" width="679" height="639" rx="16" fill="url(#panel)" stroke="#14304A"/>
-
-  <text x="36" y="56" class="label">01 — 关于 / ABOUT</text>
-  <rect x="36" y="72" width="32" height="2" fill="url(#accent)"/>
-
-  <text x="36" y="126" class="body">2026 级智能科学与技术本科生。</text>
-  <text x="36" y="168" class="body">把 C 和 Python 练到能独立写出东西，</text>
-  <text x="36" y="210" class="body">用大模型做一些真的能跑起来的小工具。</text>
-
-  <text x="36" y="266" class="en">First-year student in Intelligent Science &amp; Technology.</text>
-  <text x="36" y="288" class="en">Getting fluent in C and Python, shipping small LLM tools.</text>
-
-  <line x1="36" y1="326" x2="644" y2="326" stroke="#14304A"/>
-
-  <text x="36" y="366" class="k">在做 · BUILDING</text>
-  <text x="36" y="398" class="v">story-forge</text>
-  <line x1="36" y1="422" x2="644" y2="422" stroke="#123049"/>
-
-  <text x="36" y="462" class="k">在学 · LEARNING</text>
-  <text x="36" y="494" class="v">C · Python · 算法与数据结构</text>
-  <line x1="36" y1="518" x2="644" y2="518" stroke="#123049"/>
-
-  <text x="36" y="556" class="k">目标 · GOAL</text>
-  <text x="36" y="584" class="v">提第一个开源 PR</text>
-</svg>
+  </defs><rect x="0.5" y="0.5" width="679" height="599" rx="16" fill="url(#panel)" stroke="#14304A"/><text x="36" y="76" class="label">01 — 关于 / ABOUT</text><rect x="36" y="96" width="36" height="2" fill="url(#accent)"/><text x="36" y="150" class="body" font-size="31">2026 级智能科学与技术本科生。现阶段把</text><text x="36" y="200" class="body" font-size="31">C 和 Python 练到能独立写出东西，同时</text><text x="36" y="250" class="body" font-size="31">用大模型做一些真的能跑起来的小工具。</text><text x="36" y="316" class="body" font-size="31">比起堆功能，我更在意「这个东西为什么这</text><text x="36" y="366" class="body" font-size="31">样设计」。</text><line x1="36" y1="414" x2="644" y2="414" stroke="#14304A"/><text x="36" y="448" class="small" font-size="20">First-year student in Intelligent Science &amp; Technology.</text><text x="36" y="480" class="small" font-size="20">Getting fluent in C and Python, and building small tools</text><text x="36" y="512" class="small" font-size="20">on top of large language models.</text>
+  <circle cx="608" cy="70" r="3" fill="#5EEAD4">
+    <animate attributeName="opacity" values="0.2;0.95;0.2" dur="3.4s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="608" cy="70" r="7" fill="#5EEAD4" opacity="0.18">
+    <animate attributeName="r" values="7;12;7" dur="3.4s" repeatCount="indefinite"/>
+  </circle>
+  <line x1="0" y1="599" x2="680" y2="599" stroke="#12283C" stroke-width="1"/>
+  <rect x="0" y="598" width="110" height="2" fill="url(#pkt)" opacity="0.55">
+    <animate attributeName="x" values="-120;680" dur="9s" repeatCount="indefinite"/>
+  </rect></svg>

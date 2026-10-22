@@ -1,0 +1,30 @@
+{
+  "name": "李天成",
+  "latin": "LI TIANCHENG",
+  "handle": "@Xichen-01",
+  "role": "智能科学与技术 · 2026 级",
+
+  "about": [
+    "2026 级智能科学与技术本科生。现阶段把 C 和 Python 练到能独立写出东西，同时用大模型做一些真的能跑起来的小工具。",
+    "比起堆功能，我更在意「这个东西为什么这样设计」。"
+  ],
+  "about_en": "First-year student in Intelligent Science & Technology. Getting fluent in C and Python, and building small tools on top of large language models.",
+
+  "now": [
+    { "k": "在做", "v": "story-forge，一个带分支选择的 AI 小说生成器" },
+    { "k": "在学", "v": "C 语言、Python、基础算法与数据结构" },
+    { "k": "目标", "v": "提第一个开源 PR" }
+  ],
+
+  "work": {
+    "name": "story-forge",
+    "desc": "交互式 AI 小说生成器。阅读过程中可以选分支，剧情走向由你的选择决定。",
+    "tags": ["Python", "Flask", "DeepSeek"],
+    "url": "https://github.com/Xichen-01/story-forge"
+  },
+
+  "contact": [
+    { "k": "邮箱", "v": "your-email@example.com" },
+    { "k": "GitHub", "v": "@Xichen-01" }
+  ]
+}

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 515" width="1200" height="515"><defs>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0A1725"/>
+      <stop offset="1" stop-color="#08121D"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5EEAD4"/>
+      <stop offset="0.55" stop-color="#38BDF8"/>
+      <stop offset="1" stop-color="#A78BFA"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5EEAD4"/>
+      <stop offset="1" stop-color="#A78BFA"/>
+    </linearGradient>
+    <linearGradient id="pkt" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38BDF8" stop-opacity="0"/>
+      <stop offset="0.7" stop-color="#38BDF8" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#A5F3FC" stop-opacity="0.95"/>
+    </linearGradient>
+    <style>
+      text { font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif; }
+      .label { font-size: 13px; font-weight: 600; letter-spacing: 3px; fill: #4F6B82; }
+      .body  { fill: #DCE7F0; }
+      .small { fill: #7E96AA; }
+      .k     { font-size: 15px; font-weight: 600; letter-spacing: 2.4px; fill: #4F6B82; }
+      .v     { fill: #C7D6E3; }
+      .h1    { font-weight: 700; fill: #F1F7FB; }
+      .tag   { font-size: 11px; font-weight: 600; letter-spacing: 1.4px; fill: #7DD3FC; }
+    </style>
+  </defs><rect x="0.5" y="0.5" width="1199" height="514" rx="16" fill="url(#panel)" stroke="#14304A"/><text x="72" y="76" class="label">02 — 现在 / NOW</text><rect x="72" y="96" width="36" height="2" fill="url(#accent)"/><text x="72" y="158" class="k">在做</text><text x="72" y="192" class="v" font-size="26">story-forge，一个带分支选择的 AI 小说生成器</text><line x1="72" y1="243" x2="1128" y2="243" stroke="#14304A"/><text x="72" y="267" class="k">在学</text><text x="72" y="301" class="v" font-size="26">C 语言、Python、基础算法与数据结构</text><line x1="72" y1="352" x2="1128" y2="352" stroke="#14304A"/><text x="72" y="376" class="k">目标</text><text x="72" y="410" class="v" font-size="26">提第一个开源 PR</text>
+  <circle cx="1128" cy="70" r="3" fill="#5EEAD4">
+    <animate attributeName="opacity" values="0.2;0.95;0.2" dur="3.4s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="1128" cy="70" r="7" fill="#5EEAD4" opacity="0.18">
+    <animate attributeName="r" values="7;12;7" dur="3.4s" repeatCount="indefinite"/>
+  </circle>
+  <line x1="0" y1="514" x2="1200" y2="514" stroke="#12283C" stroke-width="1"/>
+  <rect x="0" y="513" width="110" height="2" fill="url(#pkt)" opacity="0.55">
+    <animate attributeName="x" values="-120;1200" dur="9s" repeatCount="indefinite"/>
+  </rect></svg>

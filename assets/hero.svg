@@ -1,97 +1,59 @@
-﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440" role="img" aria-label="李天成 · LI TIANCHENG · @Xichen-01 · 智能科学与技术 2026 级">
-  <title>李天成 / LI TIANCHENG — @Xichen-01</title>
-
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 380" width="1200" height="380">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#050A11"/>
-      <stop offset="0.6" stop-color="#07131F"/>
+      <stop offset="0" stop-color="#050A11"/><stop offset="0.58" stop-color="#07131F"/>
       <stop offset="1" stop-color="#0A1A2A"/>
     </linearGradient>
-
-    <radialGradient id="glowA" cx="0.12" cy="0.12" r="0.55">
-      <stop offset="0" stop-color="#22D3EE" stop-opacity="0.16"/>
-      <stop offset="1" stop-color="#22D3EE" stop-opacity="0"/>
+    <radialGradient id="ga" cx="0.12" cy="0.14" r="0.55">
+      <stop offset="0" stop-color="#22D3EE" stop-opacity="0.18"/><stop offset="1" stop-color="#22D3EE" stop-opacity="0"/>
     </radialGradient>
-
-    <radialGradient id="glowB" cx="0.88" cy="0.82" r="0.6">
-      <stop offset="0" stop-color="#8B5CF6" stop-opacity="0.14"/>
-      <stop offset="1" stop-color="#8B5CF6" stop-opacity="0"/>
+    <radialGradient id="gb" cx="0.86" cy="0.8" r="0.6">
+      <stop offset="0" stop-color="#8B5CF6" stop-opacity="0.16"/><stop offset="1" stop-color="#8B5CF6" stop-opacity="0"/>
     </radialGradient>
-
     <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#5EEAD4"/>
-      <stop offset="0.55" stop-color="#38BDF8"/>
-      <stop offset="1" stop-color="#A78BFA"/>
+      <stop offset="0" stop-color="#5EEAD4"/><stop offset="0.55" stop-color="#38BDF8"/><stop offset="1" stop-color="#A78BFA"/>
     </linearGradient>
-
+    <linearGradient id="pkt" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38BDF8" stop-opacity="0"/><stop offset="1" stop-color="#A5F3FC" stop-opacity="0.95"/>
+    </linearGradient>
     <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
       <circle cx="1" cy="1" r="1" fill="#15304A" fill-opacity="0.55"/>
     </pattern>
-
     <style>
       text { font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif; }
-      .label  { font-size: 12px; font-weight: 600; letter-spacing: 3.2px; fill: #4F6B82; }
-      .name   { font-size: 88px; font-weight: 700; letter-spacing: 8px; fill: #F2F7FB; }
-      .latin  { font-size: 21px; font-weight: 500; letter-spacing: 8px; fill: #7E96AA; }
-      .handle { font-family: "JetBrains Mono", Consolas, monospace; font-size: 17px; letter-spacing: 1px; fill: #5EEAD4; }
-      .role   { font-size: 20px; letter-spacing: 1.5px; fill: #6E889E; }
+      .lbl { font-size: 12px; font-weight: 600; letter-spacing: 3px; fill: #4F6B82; }
     </style>
   </defs>
-
-  <rect width="1200" height="440" fill="url(#bg)"/>
-  <rect width="1200" height="440" fill="url(#dots)" opacity="0.5"/>
-  <rect width="1200" height="440" fill="url(#glowA)">
-    <animate attributeName="opacity" values="0.75;1;0.75" dur="9s" repeatCount="indefinite"/>
+  <rect width="1200" height="380" fill="url(#bg)"/>
+  <rect width="1200" height="380" fill="url(#dots)" opacity="0.45"/>
+  <rect width="1200" height="380" fill="url(#ga)"/>
+  <rect width="1200" height="380" fill="url(#gb)"/>
+  <rect x="0" width="1200" height="2" fill="url(#pkt)" opacity="0.35">
+    <animate attributeName="y" values="-2;380" dur="7s" repeatCount="indefinite"/>
   </rect>
-  <rect width="1200" height="440" fill="url(#glowB)">
-    <animate attributeName="opacity" values="1;0.72;1" dur="11s" repeatCount="indefinite"/>
+  <text x="72" y="64" class="lbl">PROFILE / 2026</text>
+  <text x="1128" y="64" class="lbl" text-anchor="end">AI × SOFTWARE</text>
+  <text x="70" y="196" font-size="86" font-weight="700" letter-spacing="8" fill="#F2F7FB">李天成</text>
+  <text x="72" y="240" font-size="20" font-weight="500" letter-spacing="8" fill="#7E96AA">LI TIANCHENG</text>
+  <rect x="72" y="270" width="380" height="1" fill="#17334C"/>
+  <text x="72" y="308" font-size="17" fill="#5EEAD4" font-family="Consolas,monospace">@Xichen-01</text>
+  <text x="72" y="344" font-size="20" fill="#7E96AA" letter-spacing="1.5">智能科学与技术 · 2026 级</text>
+  
+  <g transform="translate(944,208)">
+    <circle r="132" fill="none" stroke="#17334C" stroke-dasharray="2 7" opacity="0.8"/>
+    <circle r="94" fill="none" stroke="#17334C" opacity="0.55"/>
+    <circle r="56" fill="none" stroke="#1B3E5B" stroke-dasharray="3 5" opacity="0.7"/>
+    <path d="M0 -132 A132 132 0 0 1 93 -93" fill="none" stroke="url(#accent)" stroke-width="1.6"/>
+    <circle r="3.4" fill="#5EEAD4"/>
+    <g><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="48s" repeatCount="indefinite"/>
+      <circle cx="132" cy="0" r="2.6" fill="#7DD3FC"/></g>
+    <g><animateTransform attributeName="transform" type="rotate" from="120" to="480" dur="34s" repeatCount="indefinite"/>
+      <circle cx="94" cy="0" r="2" fill="#A78BFA"/></g>
+    <g><animateTransform attributeName="transform" type="rotate" from="250" to="610" dur="26s" repeatCount="indefinite"/>
+      <circle cx="56" cy="0" r="1.6" fill="#5EEAD4"/></g>
+  </g>
+  <line x1="0" y1="379" x2="1200" y2="379" stroke="#12283C"/>
+  <rect x="0" y="377" width="90" height="2" fill="url(#pkt)" opacity="0.8">
+    <animate attributeName="x" values="-120;1200" dur="6s" repeatCount="indefinite"/>
   </rect>
-
-  <!-- 四角刻度 -->
-  <g stroke="#1B3952" stroke-width="1" fill="none">
-    <path d="M40 56 V40 H56"/>
-    <path d="M1160 56 V40 H1144"/>
-    <path d="M40 384 V400 H56"/>
-    <path d="M1160 384 V400 H1144"/>
-  </g>
-
-  <!-- 右侧轨道 -->
-  <g transform="translate(942,250)">
-    <circle r="140" fill="none" stroke="#17334C" stroke-width="1" stroke-dasharray="2 7" opacity="0.8"/>
-    <circle r="98" fill="none" stroke="#17334C" stroke-width="1" opacity="0.55"/>
-    <circle r="59" fill="none" stroke="#1B3E5B" stroke-width="1" stroke-dasharray="3 5" opacity="0.7"/>
-
-    <path d="M0 -140 A140 140 0 0 1 99 -99" fill="none" stroke="url(#accent)" stroke-width="1.6" opacity="0.9"/>
-
-    <circle r="3.5" fill="#5EEAD4"/>
-    <circle r="3.5" fill="#5EEAD4" opacity="0.25">
-      <animate attributeName="r" values="3.5;11;3.5" dur="3.6s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.28;0;0.28" dur="3.6s" repeatCount="indefinite"/>
-    </circle>
-
-    <g>
-      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="52s" repeatCount="indefinite"/>
-      <circle cx="140" cy="0" r="2.6" fill="#7DD3FC"/>
-    </g>
-    <g>
-      <animateTransform attributeName="transform" type="rotate" from="120" to="480" dur="38s" repeatCount="indefinite"/>
-      <circle cx="98" cy="0" r="2" fill="#A78BFA"/>
-    </g>
-    <g>
-      <animateTransform attributeName="transform" type="rotate" from="250" to="610" dur="29s" repeatCount="indefinite"/>
-      <circle cx="59" cy="0" r="1.6" fill="#5EEAD4"/>
-    </g>
-  </g>
-
-  <!-- 文字 -->
-  <text x="88" y="66" class="label">PROFILE / 2026</text>
-  <text x="1112" y="66" class="label" text-anchor="end">AI × SOFTWARE</text>
-
-  <text x="86" y="216" class="name">李天成</text>
-  <text x="88" y="262" class="latin">LI TIANCHENG</text>
-
-  <rect x="88" y="294" width="392" height="1" fill="#17334C"/>
-
-  <text x="88" y="334" class="handle">@Xichen-01</text>
-  <text x="88" y="378" class="role">智能科学与技术 · 2026 级</text>
 </svg>

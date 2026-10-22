@@ -262,37 +262,52 @@ def build_module(m, W):
 
 def build_body(m, V):
     W, P = V["w"], V["pad"]
+    small = W <= 800
     maxw = W - 2 * P
-    y = 54
-    parts = [f'<text x="{P}" y="{y}" class="mono" font-size="10.5" letter-spacing="3.4" '
-             f'fill="{MINT}" opacity="0.75">{esc(m["id"])}　·　{esc(m["en"])}</text>']
-    y += 40
+    num = m["id"].split("-")[-1]
+    en_sz = 19 if small else 20
+    en_lh = 31 if small else 34
+    zh_sz = 14 if small else 16
+    zh_lh = 25 if small else 28
 
+    parts = [
+        f'<rect x="{P}" y="28" width="30" height="30" fill="none" stroke="#2E5A78"/>',
+        f'<text x="{P+15}" y="{48.5}" text-anchor="middle" class="mono" font-size="12" '
+        f'fill="{MINT}">{num}</text>',
+        f'<text x="{P+44}" y="{52}" font-size="22" font-weight="700" letter-spacing="2.5" '
+        f'fill="{INK}">{esc(m["en"])}</text>',
+        f'<text x="{P+44+len(m["en"])*22*0.74+18}" y="{50}" font-size="12" letter-spacing="2.4" '
+        f'fill="{DIM}">{esc(m["zh"])}</text>',
+        f'<line x1="{P}" y1="76" x2="{W-P}" y2="76" stroke="#1E4159"/>',
+        f'<rect x="{P}" y="75" width="72" height="2" fill="url(#bar)"/>',
+    ]
+
+    y = 122
     for para in m["body_en"]:
-        for ln in wrap(plain(para), maxw, V["en"]):
-            parts.append(f'<text x="{P}" y="{y}" font-size="{V["en"]}" fill="{EN_TXT}" '
+        for ln in wrap(plain(para), maxw, en_sz):
+            parts.append(f'<text x="{P}" y="{y}" font-size="{en_sz}" fill="{EN_TXT}" '
                          f'letter-spacing="0.2">{esc(ln)}</text>')
-            y += V["enlh"]
-        y += 16
+            y += en_lh
+        y += 14
 
-    y += 6
-    parts.append(f'<line x1="{P}" y1="{y-14}" x2="{W-P}" y2="{y-14}" stroke="{MINT}" stroke-opacity="0.12"/>')
+    y += 4
+    parts.append(f'<line x1="{P}" y1="{y-12}" x2="{W-P}" y2="{y-12}" stroke="#17324A"/>')
     y += 30
     for para in m["body_zh"]:
-        for ln in wrap(plain(para), maxw, V["zh"]):
-            parts.append(f'<text x="{P}" y="{y}" font-size="{V["zh"]}" fill="{ZH_TXT}" '
-                         f'letter-spacing="0.4">{esc(ln)}</text>')
-            y += V["zhlh"]
-        y += 10
+        for ln in wrap(plain(para), maxw, zh_sz):
+            parts.append(f'<text x="{P}" y="{y}" font-size="{zh_sz}" fill="{ZH_TXT}" '
+                         f'letter-spacing="0.6">{esc(ln)}</text>')
+            y += zh_lh
+        y += 8
 
-    H = y + 18
+    H = y + 14
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">'
             f'{DEFS}'
-            f'<rect x="0" y="0" width="{W}" height="{H}" rx="14" fill="{CARD}"/>'
-            f'<rect x="0.5" y="0.5" width="{W-1}" height="{H-1}" rx="14" fill="none" '
-            f'stroke="#ffffff" stroke-opacity="0.07"/>'
+            f'<rect x="0" y="0" width="{W}" height="{H}" rx="12" fill="{CARD}"/>'
+            f'<rect x="0.5" y="0.5" width="{W-1}" height="{H-1}" rx="12" fill="none" '
+            f'stroke="#1E4159" stroke-opacity="0.9"/>'
+            f'<path d="M1 {H-14} V{H-1} H14" fill="none" stroke="{MINT}" stroke-opacity="0.5"/>'
             f'{"".join(parts)}</svg>')
-
 
 def main():
     c = json.loads((ROOT / "content.json").read_text(encoding="utf-8-sig"))

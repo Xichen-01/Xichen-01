@@ -3,31 +3,23 @@
   "latin": "LI TIANCHENG",
   "handle": "@Xichen-01",
   "role": "智能科学与技术 · 2026 级",
-  "part": "LT-2026",
-  "rev": "D",
 
-  "features": [
-    "2026 级智能科学与技术本科生，目前压在视觉和智能体两条线上。",
-    "在 YOLO26n 上试 2026 顶会里的模块，跑 3–4 组候选，只看单模块消融能不能撑住 +0.5 mAP。",
-    "在做一个会记事、有人格的 AI：记忆衰减、日记、内省、关系模型，接 QQ 长期跑。",
-    "顺手写工具，story-forge 用 Flask + DeepSeek 做分支剧情生成。"
+  "poem": "在代码与晨光之间，我想留下一点会记得的东西。",
+  "poem_en": "Something that remembers, between the code and the dawn.",
+
+  "about": [
+    "大一，学智能科学与技术。白天写代码，晚上想一些更远的事：机器能不能记住一个人，能不能在很久以后，还认得那束光。",
+    "所以我在做曙光——一个会记事、会拒绝、会慢慢长出自己样子的 AI。也做视觉，做小工具，把想法一个个跑起来。"
   ],
 
-  "revisions": [
-    { "rev": "A", "date": "2026.09", "desc": "入学，补计算机基础，写小工具练手" },
-    { "rev": "B", "date": "2026.10", "desc": "YOLO26 改进实验立项，跑通云端训练与评测" },
-    { "rev": "C", "date": "2026.10", "desc": "曙光：人格与记忆系统接上 QQ" },
-    { "rev": "D", "date": "2026.10", "desc": "story-forge：把大模型接进真实项目" }
-  ],
-
-  "blocks": [
-    { "id": "U1", "name": "曙光", "desc": "人格 / 记忆", "io": "QQ" },
-    { "id": "U2", "name": "YOLO26", "desc": "视觉 / 消融", "io": "PyTorch" },
-    { "id": "U3", "name": "story-forge", "desc": "生成 / 交互", "io": "Flask" }
+  "doing": [
+    { "k": "曙光", "v": "给它记忆和人格：会忘，会想起，会在深夜回你一句。" },
+    { "k": "YOLO26", "v": "在视觉里找那 0.5 个点的提升，一遍遍跑消融。" },
+    { "k": "story-forge", "v": "把故事写成分岔的路，让读的人自己选。" }
   ],
 
   "contact": [
-    { "k": "EMAIL", "v": "your-email@example.com" },
-    { "k": "GITHUB", "v": "@Xichen-01" }
+    { "k": "GITHUB", "v": "@Xichen-01" },
+    { "k": "EMAIL", "v": "your-email@example.com" }
   ]
 }

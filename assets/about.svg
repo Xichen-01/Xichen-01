@@ -1,40 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 464" width="1200" height="464"><defs>
-    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#0A1725"/>
-      <stop offset="1" stop-color="#08121D"/>
-    </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#5EEAD4"/>
-      <stop offset="0.55" stop-color="#38BDF8"/>
-      <stop offset="1" stop-color="#A78BFA"/>
-    </linearGradient>
-    <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#5EEAD4"/>
-      <stop offset="1" stop-color="#A78BFA"/>
-    </linearGradient>
-    <linearGradient id="pkt" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#38BDF8" stop-opacity="0"/>
-      <stop offset="0.7" stop-color="#38BDF8" stop-opacity="0.55"/>
-      <stop offset="1" stop-color="#A5F3FC" stop-opacity="0.95"/>
-    </linearGradient>
-    <style>
-      text { font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif; }
-      .label { font-size: 13px; font-weight: 600; letter-spacing: 3px; fill: #4F6B82; }
-      .body  { fill: #DCE7F0; }
-      .small { fill: #7E96AA; }
-      .k     { font-size: 15px; font-weight: 600; letter-spacing: 2.4px; fill: #4F6B82; }
-      .v     { fill: #C7D6E3; }
-      .h1    { font-weight: 700; fill: #F1F7FB; }
-      .tag   { font-size: 11px; font-weight: 600; letter-spacing: 1.4px; fill: #7DD3FC; }
-    </style>
-  </defs><rect x="0.5" y="0.5" width="1199" height="463" rx="16" fill="url(#panel)" stroke="#14304A"/><text x="72" y="76" class="label">01 — 关于 / ABOUT</text><rect x="72" y="96" width="36" height="2" fill="url(#accent)"/><text x="72" y="150" class="body" font-size="29">2026 级智能科学与技术本科生。现阶段把 C 和 Python 练到能独立写出东西，</text><text x="72" y="198" class="body" font-size="29">同时用大模型做一些真的能跑起来的小工具。</text><text x="72" y="264" class="body" font-size="29">比起堆功能，我更在意「这个东西为什么这样设计」。</text><line x1="72" y1="312" x2="1128" y2="312" stroke="#14304A"/><text x="72" y="346" class="small" font-size="19">First-year student in Intelligent Science &amp; Technology. Getting fluent in C and Python, and building small</text><text x="72" y="377" class="small" font-size="19">tools on top of large language models.</text>
-  <circle cx="1128" cy="70" r="3" fill="#5EEAD4">
-    <animate attributeName="opacity" values="0.2;0.95;0.2" dur="3.4s" repeatCount="indefinite"/>
-  </circle>
-  <circle cx="1128" cy="70" r="7" fill="#5EEAD4" opacity="0.18">
-    <animate attributeName="r" values="7;12;7" dur="3.4s" repeatCount="indefinite"/>
-  </circle>
-  <line x1="0" y1="463" x2="1200" y2="463" stroke="#12283C" stroke-width="1"/>
-  <rect x="0" y="462" width="110" height="2" fill="url(#pkt)" opacity="0.55">
-    <animate attributeName="x" values="-120;1200" dur="9s" repeatCount="indefinite"/>
-  </rect></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 534" width="1200" height="534"><defs>
+  <radialGradient id="lg" cx="0.12" cy="0.04" r="0.95">
+    <stop offset="0" stop-color="#5EEAD4" stop-opacity="0.065"/>
+    <stop offset="0.55" stop-color="#38BDF8" stop-opacity="0.02"/>
+    <stop offset="1" stop-color="#38BDF8" stop-opacity="0"/>
+  </radialGradient>
+  <pattern id="g1" width="24" height="24" patternUnits="userSpaceOnUse">
+    <path d="M24 0H0V24" fill="none" stroke="#0D1E2C" stroke-width="1"/>
+  </pattern>
+  <pattern id="g2" width="96" height="96" patternUnits="userSpaceOnUse">
+    <path d="M96 0H0V96" fill="none" stroke="#12293C" stroke-width="1"/>
+  </pattern>
+</defs><style>
+  text { font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif; }
+  .mono { font-family: Consolas, "JetBrains Mono", monospace; font-size: 13px; letter-spacing: 2.4px; fill: #5B7A90; }
+  .mono2 { font-family: Consolas, "JetBrains Mono", monospace; fill: #93A9BB; }
+</style><rect width="1200" height="534" fill="#04090F"/><rect width="1200" height="534" fill="url(#g1)" opacity="0.5"/><rect width="1200" height="534" fill="url(#g2)" opacity="0.45"/><rect width="1200" height="534" fill="url(#lg)"/><rect x="24" y="24" width="1152" height="486" fill="none" stroke="#254A62"/><path d="M24 36 V24 H36" fill="none" stroke="#2E5A78" stroke-width="1.5"/><path d="M1176 36 V24 H1164" fill="none" stroke="#2E5A78" stroke-width="1.5"/><path d="M24 498 V510 H36" fill="none" stroke="#2E5A78" stroke-width="1.5"/><path d="M1176 498 V510 H1164" fill="none" stroke="#2E5A78" stroke-width="1.5"/><rect x="72" y="38" width="32" height="32" fill="none" stroke="#254A62"/><text x="88" y="60" text-anchor="middle" font-size="14" fill="#5EEAD4" font-family="Consolas,monospace">01</text><text x="120" y="66" font-size="27" font-weight="700" fill="#DCE7F0">关于我</text><text x="217.0" y="64" class="mono">ABOUT ME</text><line x1="72" y1="96" x2="1128" y2="96" stroke="#254A62"/><line x1="72" y1="92" x2="72" y2="100" stroke="#254A62"/><line x1="1128" y1="92" x2="1128" y2="100" stroke="#254A62"/><text x="72" y="132" class="mono">个人简介 / PROFILE</text><line x1="72" y1="142" x2="580" y2="142" stroke="#254A62" opacity="0.6"/><text x="660" y="132" class="mono">EN</text><line x1="660" y1="142" x2="1128" y2="142" stroke="#254A62" opacity="0.6"/><text x="72" y="176" font-size="29" fill="#DCE7F0">2026 级智能科学与技术本科生。现阶段</text><text x="72" y="222" font-size="29" fill="#DCE7F0">把 C 和 Python 练到能独立写出东西，</text><text x="72" y="268" font-size="29" fill="#DCE7F0">同时用大模型做一些真的能跑起来的小</text><text x="72" y="314" font-size="29" fill="#DCE7F0">工具。</text><text x="72" y="378" font-size="29" fill="#DCE7F0">比起堆功能，我更在意「这个东西为什</text><text x="72" y="424" font-size="29" fill="#DCE7F0">么这样设计」。</text><text x="660" y="176" font-size="21" fill="#93A9BB">First-year student in Intelligent Science</text><text x="660" y="208" font-size="21" fill="#93A9BB">&amp; Technology. Getting fluent in C and</text><text x="660" y="240" font-size="21" fill="#93A9BB">Python, and building small tools on top of</text><text x="660" y="272" font-size="21" fill="#93A9BB">large language models. More than piling up</text><text x="660" y="304" font-size="21" fill="#93A9BB">features, I care about why a thing is</text><text x="660" y="336" font-size="21" fill="#93A9BB">designed the way it is.</text><line x1="626" y1="124" x2="626" y2="474" stroke="#254A62"/><line x1="621" y1="124" x2="631" y2="124" stroke="#254A62"/><line x1="621" y1="474" x2="631" y2="474" stroke="#254A62"/></svg>

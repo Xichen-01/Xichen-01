@@ -1,9 +1,9 @@
 ﻿#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""把 content.json 渲染成 assets/*.svg 和 README.md。
+"""把 content.json 渲染成一套「工程图纸」风格的 SVG + README。
 
-改文案只需要动 content.json，然后跑一次：
-    python scripts/build.py
+改文案只动 content.json，然后：
+    py -3 scripts/build.py
 """
 import json
 import hashlib
@@ -12,22 +12,23 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 ASSETS = ROOT / "assets"
 
-# ── 配色 ────────────────────────────────────────────────
-PANEL_TOP = "#0A1725"
-PANEL_BOT = "#08121D"
-STROKE = "#14304A"
-TEXT = "#DCE7F0"
-MUTED = "#7E96AA"
-DIM = "#4F6B82"
-SOFT = "#C7D6E3"
+BG = "#04090F"
+PANEL = "#08121D"
+FRAME = "#254A62"
+GRID_S = "#0D1E2C"
+GRID_L = "#12293C"
+INK = "#DCE7F0"
+MUTED = "#93A9BB"
+DIM = "#5B7A90"
+ACCENT = "#5EEAD4"
+BLUE = "#7DD3FC"
 
-# ── 两套尺寸 ────────────────────────────────────────────
-DESKTOP = dict(w=1200, pad=72, label=13, body=29, lh=48, small=19, smalllh=31,
-               h1=40, h2=26, lh2=39, name=86, latin=20, handle=17, role=20,
-               radius=16, hero_h=380, gap=18, suffix="")
-MOBILE = dict(w=680, pad=36, label=12, body=31, lh=50, small=20, smalllh=32,
-              h1=34, h2=28, lh2=41, name=66, latin=14, handle=15, role=16,
-              radius=16, hero_h=360, gap=16, suffix="-mobile")
+DESKTOP = dict(w=1200, pad=72, body=29, lh=46, small=21, smalllh=32,
+               h1=40, h2=30, lh2=44, name=86, latin=19, handle=18, role=20,
+               radius=14, hero_h=460, stack=False, gap=18)
+MOBILE = dict(w=680, pad=36, body=26, lh=42, small=18, smalllh=28,
+              h1=32, h2=26, lh2=38, name=64, latin=13, handle=14, role=15,
+              radius=14, hero_h=400, stack=True, gap=16)
 
 
 def esc(s):
@@ -36,9 +37,9 @@ def esc(s):
 
 def chw(c, size):
     if ord(c) < 128:
-        if c in "ilj|.,:;'!()[]":  return size * 0.32
-        if c in "mwMW@":            return size * 0.86
-        if c.isupper():             return size * 0.66
+        if c in "ilj|.,:;'!()[]": return size * 0.32
+        if c in "mwMW@": return size * 0.86
+        if c.isupper(): return size * 0.66
         return size * 0.55
     return size * 1.0
 
@@ -48,7 +49,6 @@ def tw(s, size):
 
 
 def wrap(text, maxw, size):
-    """按中英混排粗略断行。"""
     tokens, buf = [], ""
     for c in text:
         if ord(c) < 128 and not c.isspace():
@@ -60,12 +60,11 @@ def wrap(text, maxw, size):
             tokens.append(" " if c.isspace() else c)
     if buf:
         tokens.append(buf)
-
     lines, cur = [], ""
     for t in tokens:
         if t == " " and not cur:
             continue
-        if tw(cur + t, size) <= maxw:
+        if tw(cur + t, size) <= maxw or (t and t[0] in "，。、；：？！）」』】》%,.;:?!)]}" and cur):
             cur += t
         else:
             if cur.strip():
@@ -76,259 +75,304 @@ def wrap(text, maxw, size):
     return lines or [""]
 
 
-DEFS = f'''<defs>
-    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="{PANEL_TOP}"/>
-      <stop offset="1" stop-color="{PANEL_BOT}"/>
-    </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#5EEAD4"/>
-      <stop offset="0.55" stop-color="#38BDF8"/>
-      <stop offset="1" stop-color="#A78BFA"/>
-    </linearGradient>
-    <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#5EEAD4"/>
-      <stop offset="1" stop-color="#A78BFA"/>
-    </linearGradient>
-    <linearGradient id="pkt" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#38BDF8" stop-opacity="0"/>
-      <stop offset="0.7" stop-color="#38BDF8" stop-opacity="0.55"/>
-      <stop offset="1" stop-color="#A5F3FC" stop-opacity="0.95"/>
-    </linearGradient>
-    <style>
-      text {{ font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif; }}
-      .label {{ font-size: {DESKTOP['label']}px; font-weight: 600; letter-spacing: 3px; fill: {DIM}; }}
-      .body  {{ fill: {TEXT}; }}
-      .small {{ fill: {MUTED}; }}
-      .k     {{ font-size: 15px; font-weight: 600; letter-spacing: 2.4px; fill: {DIM}; }}
-      .v     {{ fill: {SOFT}; }}
-      .h1    {{ font-weight: 700; fill: #F1F7FB; }}
-      .tag   {{ font-size: 11px; font-weight: 600; letter-spacing: 1.4px; fill: #7DD3FC; }}
-    </style>
-  </defs>'''
+GRID = f'''<defs>
+  <radialGradient id="lg" cx="0.12" cy="0.04" r="0.95">
+    <stop offset="0" stop-color="#5EEAD4" stop-opacity="0.065"/>
+    <stop offset="0.55" stop-color="#38BDF8" stop-opacity="0.02"/>
+    <stop offset="1" stop-color="#38BDF8" stop-opacity="0"/>
+  </radialGradient>
+  <pattern id="g1" width="24" height="24" patternUnits="userSpaceOnUse">
+    <path d="M24 0H0V24" fill="none" stroke="{GRID_S}" stroke-width="1"/>
+  </pattern>
+  <pattern id="g2" width="96" height="96" patternUnits="userSpaceOnUse">
+    <path d="M96 0H0V96" fill="none" stroke="{GRID_L}" stroke-width="1"/>
+  </pattern>
+</defs>'''
+
+STYLE = f'''<style>
+  text {{ font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif; }}
+  .mono {{ font-family: Consolas, "JetBrains Mono", monospace; font-size: 13px; letter-spacing: 2.4px; fill: {DIM}; }}
+  .mono2 {{ font-family: Consolas, "JetBrains Mono", monospace; fill: {MUTED}; }}
+</style>'''
 
 
-def label(num, zh, en, P, size=None):
-    return (f'<text x="{P}" y="76" class="label">{esc(num)} — {esc(zh)} / {esc(en)}</text>'
-            f'<rect x="{P}" y="96" width="36" height="2" fill="url(#accent)"/>')
+def frame(W, H, m=24):
+    x0, y0, x1, y1 = m, m, W - m, H - m
+    t = 12
+    marks = ""
+    for (x, y, dx, dy) in ((x0, y0, 1, 1), (x1, y0, -1, 1), (x0, y1, 1, -1), (x1, y1, -1, -1)):
+        marks += f'<path d="M{x} {y + dy*t} V{y} H{x + dx*t}" fill="none" stroke="#2E5A78" stroke-width="1.5"/>'
+    return (f'<rect x="{x0}" y="{y0}" width="{x1-x0}" height="{y1-y0}" fill="none" stroke="{FRAME}"/>' + marks)
 
 
-def decor(W, H):
-    """右上角脉冲点 + 底部流光，给每张卡一点动静。"""
-    return f'''
-  <circle cx="{W-72}" cy="70" r="3" fill="#5EEAD4">
-    <animate attributeName="opacity" values="0.2;0.95;0.2" dur="3.4s" repeatCount="indefinite"/>
-  </circle>
-  <circle cx="{W-72}" cy="70" r="7" fill="#5EEAD4" opacity="0.18">
-    <animate attributeName="r" values="7;12;7" dur="3.4s" repeatCount="indefinite"/>
-  </circle>
-  <line x1="0" y1="{H-1}" x2="{W}" y2="{H-1}" stroke="#12283C" stroke-width="1"/>
-  <rect x="0" y="{H-2}" width="110" height="2" fill="url(#pkt)" opacity="0.55">
-    <animate attributeName="x" values="-120;{W}" dur="9s" repeatCount="indefinite"/>
-  </rect>'''
+def header(num, zh, en, P, W, size=27):
+    return (f'<rect x="{P}" y="38" width="32" height="32" fill="none" stroke="{FRAME}"/>'
+            f'<text x="{P+16}" y="60" text-anchor="middle" font-size="14" fill="{ACCENT}" '
+            f'font-family="Consolas,monospace">{num}</text>'
+            f'<text x="{P+48}" y="66" font-size="{size}" font-weight="700" fill="{INK}">{esc(zh)}</text>'
+            f'<text x="{P+48+tw(zh,size)+16}" y="64" class="mono">{esc(en)}</text>'
+            f'<line x1="{P}" y1="96" x2="{W-P}" y2="96" stroke="{FRAME}"/>'
+            f'<line x1="{P}" y1="92" x2="{P}" y2="100" stroke="{FRAME}"/>'
+            f'<line x1="{W-P}" y1="92" x2="{W-P}" y2="100" stroke="{FRAME}"/>')
 
 
-def shell(W, H, inner, R=16):
+def shell(W, H, inner):
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">'
-            f'{DEFS}'
-            f'<rect x="0.5" y="0.5" width="{W-1}" height="{H-1}" rx="{R}" fill="url(#panel)" stroke="{STROKE}"/>'
-            f'{inner}{decor(W, H)}</svg>')
+            f'{GRID}{STYLE}'
+            f'<rect width="{W}" height="{H}" fill="{BG}"/>'
+            f'<rect width="{W}" height="{H}" fill="url(#g1)" opacity="0.5"/>'
+            f'<rect width="{W}" height="{H}" fill="url(#g2)" opacity="0.45"/><rect width="{W}" height="{H}" fill="url(#lg)"/>'
+            f'{frame(W, H)}{inner}</svg>')
 
 
-# ── 卡片 ────────────────────────────────────────────────
-def build_about(c, V):
-    W, P = V["w"], V["pad"]
-    maxw = W - 2 * P
-    y = 150
-    out = []
-    for para in c["about"]:
-        for ln in wrap(para, maxw, V["body"]):
-            out.append(f'<text x="{P}" y="{y}" class="body" font-size="{V["body"]}">{esc(ln)}</text>')
-            y += V["lh"]
-        y += V["gap"]
-
-    en_lines = wrap(c.get("about_en", ""), maxw, V["small"])
-    if en_lines:
-        y += 6
-        out.append(f'<line x1="{P}" y1="{y-24}" x2="{W-P}" y2="{y-24}" stroke="{STROKE}"/>')
-        y += 10
-        for ln in en_lines:
-            out.append(f'<text x="{P}" y="{y}" class="small" font-size="{V["small"]}">{esc(ln)}</text>')
-            y += V["smalllh"]
-
-    H = y + 56
-    return shell(W, H, label("01", "关于", "ABOUT", P) + "".join(out), V["radius"])
+def dim(x1, x2, y, label):
+    """水平尺寸线：两端短竖线 + 中间小字。"""
+    return (f'<line x1="{x1}" y1="{y}" x2="{x2}" y2="{y}" stroke="#2E5A78"/>'
+            f'<line x1="{x1}" y1="{y-5}" x2="{x1}" y2="{y+5}" stroke="#2E5A78"/>'
+            f'<line x1="{x2}" y1="{y-5}" x2="{x2}" y2="{y+5}" stroke="#2E5A78"/>'
+            f'<text x="{(x1+x2)/2}" y="{y-8}" text-anchor="middle" class="mono">{label}</text>')
 
 
-def build_now(c, V):
-    W, P = V["w"], V["pad"]
-    maxw = W - 2 * P
-    y = 158
-    out = []
-    rows = c["now"]
-    for i, item in enumerate(rows):
-        out.append(f'<text x="{P}" y="{y}" class="k">{esc(item["k"])}</text>')
-        yy = y + 34
-        for ln in wrap(item["v"], maxw, V["h2"]):
-            out.append(f'<text x="{P}" y="{yy}" class="v" font-size="{V["h2"]}">{esc(ln)}</text>')
-            yy += V["lh2"]
-        y = yy + 26
-        if i < len(rows) - 1:
-            out.append(f'<line x1="{P}" y1="{y-14}" x2="{W-P}" y2="{y-14}" stroke="{STROKE}"/>')
-            y += 10
-
-    H = y + 40
-    return shell(W, H, label("02", "现在", "NOW", P) + "".join(out), V["radius"])
+def module(x, y, w, h, code):
+    t = 9
+    return (f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="#0A1622" stroke="{FRAME}"/>'
+            f'<path d="M{x} {y+t} V{y} H{x+t}" fill="none" stroke="{ACCENT}" stroke-width="1.4" opacity="0.85"/>'
+            f'<path d="M{x+w} {y+h-t} V{y+h} H{x+w-t}" fill="none" stroke="{ACCENT}" stroke-width="1.4" opacity="0.85"/>'
+            f'<text x="{x+16}" y="{y+22}" class="mono" fill="{ACCENT}" style="fill:{ACCENT}">{code}</text>')
 
 
-def build_work(c, V):
-    W, P = V["w"], V["pad"]
-    inner_w = W - 2 * P
-    pad_in = 36
-    text_w = inner_w - pad_in * 2
-    y = 150
-    out = []
-    out.append(f'<rect x="{P}" y="{y}" width="{inner_w}" height="1" fill="none"/>')
-
-    # 内卡
-    card_y = y
-    yy = card_y + 58
-    out.append(f'<text x="{P+pad_in}" y="{yy}" class="h1" font-size="{V["h1"]}">{esc(c["work"]["name"])}</text>')
-    yy += 40
-    for ln in wrap(c["work"]["desc"], text_w, 22):
-        out.append(f'<text x="{P+pad_in}" y="{yy}" class="small" font-size="22">{esc(ln)}</text>')
-        yy += 34
-    yy += 14
-    x = P + pad_in
-    for t in c["work"]["tags"]:
-        w = tw(t.upper(), 11) * 1.2 + 30
-        out.append(f'<rect x="{x}" y="{yy}" width="{w}" height="26" rx="13" fill="#0C2436" stroke="#1B4B6B"/>')
-        out.append(f'<text x="{x+w/2}" y="{yy+17}" class="tag" text-anchor="middle">{esc(t.upper())}</text>')
-        x += w + 10
-    card_h = (yy + 26 + 40) - card_y
-
-    out.insert(1, f'<rect x="{P}" y="{card_y}" width="{inner_w}" height="{card_h}" rx="12" fill="#0B1926" stroke="#16324B"/>')
-    out.insert(2, f'<rect x="{P}" y="{card_y}" width="3.5" height="{card_h}" rx="1.75" fill="url(#edge)"/>')
-
-    H = card_y + card_h + 56
-    return shell(W, H, label("03", "项目", "WORK", P) + "".join(out), V["radius"])
-
-
-def build_contact(c, V):
-    W, P = V["w"], V["pad"]
-    y = 158
-    out = []
-    rows = c["contact"]
-    for i, item in enumerate(rows):
-        out.append(f'<text x="{P}" y="{y}" class="k">{esc(item["k"])}</text>')
-        out.append(f'<text x="{P}" y="{y+36}" class="v" font-size="24" style="font-family:Consolas,monospace">{esc(item["v"])}</text>')
-        y += 96
-        if i < len(rows) - 1:
-            out.append(f'<line x1="{P}" y1="{y-26}" x2="{W-P}" y2="{y-26}" stroke="{STROKE}"/>')
-    H = y + 34
-    return shell(W, H, label("04", "联系", "CONTACT", P) + "".join(out), V["radius"])
+def chip(cx, cy, s):
+    out = [f'<rect x="{cx-s}" y="{cy-s}" width="{2*s}" height="{2*s}" rx="8" fill="#0A1A28" stroke="{FRAME}"/>',
+           f'<rect x="{cx-s*0.56}" y="{cy-s*0.56}" width="{s*1.12}" height="{s*1.12}" rx="3" fill="none" stroke="#2A4A66"/>']
+    n, gap = 5, 2 * s / 6
+    for i in range(1, 6):
+        off = -s + gap * i
+        out.append(f'<line x1="{cx+off}" y1="{cy-s}" x2="{cx+off}" y2="{cy-s-15}" stroke="#2A4A66"/>')
+        out.append(f'<line x1="{cx+off}" y1="{cy+s}" x2="{cx+off}" y2="{cy+s+15}" stroke="#2A4A66"/>')
+        out.append(f'<line x1="{cx-s}" y1="{cy+off}" x2="{cx-s-15}" y2="{cy+off}" stroke="#2A4A66"/>')
+        out.append(f'<line x1="{cx+s}" y1="{cy+off}" x2="{cx+s+15}" y2="{cy+off}" stroke="#2A4A66"/>')
+    for dx, dy in ((0, -1), (0, 1), (-1, 0), (1, 0)):
+        x2 = cx + dx * (s + 15)
+        y2 = cy + dy * (s + 15)
+        out.append(f'<line x1="{x2}" y1="{y2}" x2="{x2 + dx*34}" y2="{y2 + dy*34}" stroke="#22475F" stroke-dasharray="3 4"/>')
+        out.append(f'<circle cx="{x2 + dx*34}" cy="{y2 + dy*34}" r="2" fill="{BLUE}" opacity="0.9"/>')
+    out.append(f'<circle cx="{cx}" cy="{cy}" r="13" fill="none" stroke="{ACCENT}" opacity="0.7"/>')
+    out.append(f'<circle cx="{cx}" cy="{cy}" r="4.5" fill="{ACCENT}">'
+               f'<animate attributeName="r" values="4.5;9;4.5" dur="3.6s" repeatCount="indefinite"/></circle>')
+    return "".join(out)
 
 
 def build_hero(c, V):
     W, P = V["w"], V["pad"]
     H = V["hero_h"]
     small = V["w"] < 800
-    orbit = "" if small else f'''
-  <g transform="translate({W-256},208)">
-    <circle r="132" fill="none" stroke="#17334C" stroke-dasharray="2 7" opacity="0.8"/>
-    <circle r="94" fill="none" stroke="#17334C" opacity="0.55"/>
-    <circle r="56" fill="none" stroke="#1B3E5B" stroke-dasharray="3 5" opacity="0.7"/>
-    <path d="M0 -132 A132 132 0 0 1 93 -93" fill="none" stroke="url(#accent)" stroke-width="1.6"/>
-    <circle r="3.4" fill="#5EEAD4"/>
-    <g><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="48s" repeatCount="indefinite"/>
-      <circle cx="132" cy="0" r="2.6" fill="#7DD3FC"/></g>
-    <g><animateTransform attributeName="transform" type="rotate" from="120" to="480" dur="34s" repeatCount="indefinite"/>
-      <circle cx="94" cy="0" r="2" fill="#A78BFA"/></g>
-    <g><animateTransform attributeName="transform" type="rotate" from="250" to="610" dur="26s" repeatCount="indefinite"/>
-      <circle cx="56" cy="0" r="1.6" fill="#5EEAD4"/></g>
-  </g>'''
+    name_w = tw(c["name"], V["name"]) + 7 * (len(c["name"]) - 1)
+    ny = 196 if not small else 200
 
-    ny = 196 if not small else 190
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#050A11"/><stop offset="0.58" stop-color="#07131F"/>
-      <stop offset="1" stop-color="#0A1A2A"/>
-    </linearGradient>
-    <radialGradient id="ga" cx="0.12" cy="0.14" r="0.55">
-      <stop offset="0" stop-color="#22D3EE" stop-opacity="0.18"/><stop offset="1" stop-color="#22D3EE" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="gb" cx="0.86" cy="0.8" r="0.6">
-      <stop offset="0" stop-color="#8B5CF6" stop-opacity="0.16"/><stop offset="1" stop-color="#8B5CF6" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#5EEAD4"/><stop offset="0.55" stop-color="#38BDF8"/><stop offset="1" stop-color="#A78BFA"/>
-    </linearGradient>
-    <linearGradient id="pkt" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#38BDF8" stop-opacity="0"/><stop offset="1" stop-color="#A5F3FC" stop-opacity="0.95"/>
-    </linearGradient>
-    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
-      <circle cx="1" cy="1" r="1" fill="#15304A" fill-opacity="0.55"/>
-    </pattern>
-    <style>
-      text {{ font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif; }}
-      .lbl {{ font-size: 12px; font-weight: 600; letter-spacing: 3px; fill: #4F6B82; }}
-    </style>
-  </defs>
-  <rect width="{W}" height="{H}" fill="url(#bg)"/>
-  <rect width="{W}" height="{H}" fill="url(#dots)" opacity="0.45"/>
-  <rect width="{W}" height="{H}" fill="url(#ga)"/>
-  <rect width="{W}" height="{H}" fill="url(#gb)"/>
-  <rect x="0" width="{W}" height="2" fill="url(#pkt)" opacity="0.35">
-    <animate attributeName="y" values="-2;{H}" dur="7s" repeatCount="indefinite"/>
-  </rect>
-  <text x="{P}" y="64" class="lbl">PROFILE / 2026</text>
-  <text x="{W-P}" y="64" class="lbl" text-anchor="end">AI × SOFTWARE</text>
-  <text x="{P-2}" y="{ny}" font-size="{V['name']}" font-weight="700" letter-spacing="{6 if small else 8}" fill="#F2F7FB">{esc(c["name"])}</text>
-  <text x="{P}" y="{ny+44}" font-size="{V['latin']}" font-weight="500" letter-spacing="{5 if small else 8}" fill="{MUTED}">{esc(c["latin"])}</text>
-  <rect x="{P}" y="{ny+74}" width="{240 if small else 380}" height="1" fill="#17334C"/>
-  <text x="{P}" y="{ny+112}" font-size="{V['handle']}" fill="#5EEAD4" font-family="Consolas,monospace">{esc(c["handle"])}</text>
-  <text x="{P}" y="{ny+148}" font-size="{V['role']}" fill="{MUTED}" letter-spacing="1.5">{esc(c["role"])}</text>
-  {orbit}
-  <line x1="0" y1="{H-1}" x2="{W}" y2="{H-1}" stroke="#12283C"/>
-  <rect x="0" y="{H-3}" width="90" height="2" fill="url(#pkt)" opacity="0.8">
-    <animate attributeName="x" values="-120;{W}" dur="6s" repeatCount="indefinite"/>
-  </rect>
-</svg>'''
+    body = [f'<text x="{P}" y="62" class="mono">{esc(c["eyebrow"])}</text>',
+            f'<text x="{W-P}" y="62" class="mono" text-anchor="end">SHEET 01 / 05</text>',
+            f'<text x="{P-4}" y="{ny}" font-size="{V["name"]}" font-weight="700" '
+            f'letter-spacing="7" fill="{INK}">{esc(c["name"])}</text>',
+            dim(P, P + name_w, ny + 36, "1:1"),
+            f'<text x="{P}" y="{ny+82}" class="mono2" font-size="{V["latin"]}" '
+            f'letter-spacing="{5 if small else 7}">{esc(c["latin"])}</text>',
+            f'<line x1="{P}" y1="{ny+108}" x2="{P+340 if not small else P+250}" y2="{ny+108}" stroke="{FRAME}"/>',
+            f'<text x="{P}" y="{ny+148}" font-family="Consolas,monospace" font-size="{V["handle"]}" '
+            f'fill="{ACCENT}">{esc(c["handle"])}</text>',
+            f'<text x="{P}" y="{ny+190}" font-size="{V["role"]}" fill="{MUTED}">{esc(c["tagline"])}</text>',
+            f'<text x="{P}" y="{ny+218}" font-size="{15 if not small else 13}" fill="#546B80">'
+            f'{esc(c["tagline_en"])}</text>']
+
+    if not small:
+        body.append(chip(W - 252, 192, 74)); body.append(f'<polyline points="{W-324},152 {W-392},106 {W-470},106" fill="none" stroke="#2E5A78"/>'); body.append(f'<circle cx="{W-324}" cy="152" r="2.6" fill="{ACCENT}"/>'); body.append(f'<text x="{W-470}" y="98" text-anchor="end" class="mono">FIG.1 / SYSTEM CORE</text>');
+        tb_x, tb_y, tb_w, tb_h = W - 348, H - 124, 276, 96
+        body.append(f'<rect x="{tb_x}" y="{tb_y}" width="{tb_w}" height="{tb_h}" fill="none" stroke="{FRAME}"/>')
+        body.append(f'<line x1="{tb_x}" y1="{tb_y+32}" x2="{tb_x+tb_w}" y2="{tb_y+32}" stroke="{FRAME}"/>')
+        body.append(f'<line x1="{tb_x}" y1="{tb_y+64}" x2="{tb_x+tb_w}" y2="{tb_y+64}" stroke="{FRAME}"/>')
+        body.append(f'<line x1="{tb_x+70}" y1="{tb_y}" x2="{tb_x+70}" y2="{tb_y+tb_h}" stroke="{FRAME}"/>')
+        for i, (k, v) in enumerate((("DRAWN", c["name"]), ("DATE", "2026.10"), ("SCALE", "1:1"))):
+            body.append(f'<text x="{tb_x+12}" y="{tb_y+21+i*32}" class="mono">{k}</text>')
+            body.append(f'<text x="{tb_x+84}" y="{tb_y+21+i*32}" font-size="14" fill="{INK}">{esc(v)}</text>')
+
+    body.append(f'<rect x="0" y="0" width="{W}" height="2" fill="{ACCENT}" opacity="0.25">'
+                f'<animate attributeName="y" values="0;{H}" dur="9s" repeatCount="indefinite"/></rect>')
+
+    return shell(W, H, "".join(body))
+
+
+def build_about(c, V):
+    W, P = V["w"], V["pad"]
+    inner = W - 2 * P
+    y0 = 132
+
+    if V["stack"]:
+        out, y = [], y0 + 24
+        out.append(f'<text x="{P}" y="{y}" class="mono">个人简介 / PROFILE</text>')
+        out.append(f'<line x1="{P}" y1="{y+10}" x2="{W-P}" y2="{y+10}" stroke="{FRAME}" opacity="0.6"/>')
+        y += 44
+        for para in c["about_cn"]:
+            for ln in wrap(para, inner, V["body"]):
+                out.append(f'<text x="{P}" y="{y}" font-size="{V["body"]}" fill="{INK}">{esc(ln)}</text>')
+                y += V["lh"]
+            y += V["gap"]
+        y += 10
+        out.append(f'<text x="{P}" y="{y}" class="mono">EN</text>')
+        y += 28
+        for ln in wrap(c["about_en"], inner, V["small"]):
+            out.append(f'<text x="{P}" y="{y}" font-size="{V["small"]}" fill="{MUTED}">{esc(ln)}</text>')
+            y += V["smalllh"]
+        H = y + 48
+        return shell(W, H, header("01", "关于我", "ABOUT ME", P, W) + "".join(out))
+
+    left_w = int(inner * 0.5)
+    div_x = P + int(inner * 0.525)
+    right_x = div_x + 34
+    right_w = W - P - right_x
+
+    out = [f'<text x="{P}" y="{y0}" class="mono">个人简介 / PROFILE</text>',
+           f'<line x1="{P}" y1="{y0+10}" x2="{P+left_w-20}" y2="{y0+10}" stroke="{FRAME}" opacity="0.6"/>',
+           f'<text x="{right_x}" y="{y0}" class="mono">EN</text>',
+           f'<line x1="{right_x}" y1="{y0+10}" x2="{W-P}" y2="{y0+10}" stroke="{FRAME}" opacity="0.6"/>']
+
+    yl = y0 + 44
+    for para in c["about_cn"]:
+        for ln in wrap(para, left_w - 10, V["body"]):
+            out.append(f'<text x="{P}" y="{yl}" font-size="{V["body"]}" fill="{INK}">{esc(ln)}</text>')
+            yl += V["lh"]
+        yl += V["gap"]
+
+    yr = y0 + 44
+    for ln in wrap(c["about_en"], right_w, V["small"]):
+        out.append(f'<text x="{right_x}" y="{yr}" font-size="{V["small"]}" fill="{MUTED}">{esc(ln)}</text>')
+        yr += V["smalllh"]
+
+    y_end = max(yl, yr)
+    out.append(f'<line x1="{div_x}" y1="{y0-8}" x2="{div_x}" y2="{y_end-14}" stroke="{FRAME}"/>')
+    out.append(f'<line x1="{div_x-5}" y1="{y0-8}" x2="{div_x+5}" y2="{y0-8}" stroke="{FRAME}"/>')
+    out.append(f'<line x1="{div_x-5}" y1="{y_end-14}" x2="{div_x+5}" y2="{y_end-14}" stroke="{FRAME}"/>')
+
+    H = y_end + 46
+    return shell(W, H, header("01", "关于我", "ABOUT ME", P, W) + "".join(out))
+
+
+def build_path(c, V):
+    W, P = V["w"], V["pad"]
+    inner = W - 2 * P
+    y = 128
+    out, codes = [], []
+
+    for i, item in enumerate(c["path"]):
+        pad_in = 26
+        text_w = inner - pad_in * 2
+        lines = wrap(item["desc"], text_w, V["small"])
+        h = 74 + 30 + len(lines) * V["smalllh"] + 26
+        out.append(module(P, y, inner, h, f"M{i+1}"))
+        out.append(f'<text x="{P+pad_in}" y="{y+52}" class="mono">{esc(item["when"])}</text>')
+        out.append(f'<text x="{P+pad_in}" y="{y+90}" font-size="{V["h2"]}" font-weight="700" '
+                   f'fill="{INK}">{esc(item["title"])}</text>')
+        yy = y + 122
+        for ln in lines:
+            out.append(f'<text x="{P+pad_in}" y="{yy}" font-size="{V["small"]}" fill="{MUTED}">{esc(ln)}</text>')
+            yy += V["smalllh"]
+        codes.append((y, h))
+        y += h + 44
+
+    # 连接线与箭头
+    for i in range(len(codes) - 1):
+        y1 = codes[i][0] + codes[i][1]
+        y2 = codes[i + 1][0]
+        x = P + 20
+        out.append(f'<line x1="{x}" y1="{y1}" x2="{x}" y2="{y2-6}" stroke="#2E5A78"/>')
+        out.append(f'<path d="M{x-4} {y2-12} L{x} {y2-4} L{x+4} {y2-12}" fill="none" stroke="#2E5A78"/>')
+
+    if codes:
+        x = P + 20
+        out.append(f'<circle cx="{x}" cy="{codes[0][0]}" r="2.4" fill="{BLUE}">'
+                   f'<animate attributeName="cy" values="{codes[0][0]};{codes[-1][0]+codes[-1][1]}'
+                   f'" dur="7s" repeatCount="indefinite"/></circle>')
+
+    H = y + 12
+    return shell(W, H, header("02", "路径", "PATH", P, W) + "".join(out))
+
+
+def build_work(c, V):
+    W, P = V["w"], V["pad"]
+    inner = W - 2 * P
+    pad_in, top = 26, 122
+
+    lines = wrap(c["work"]["desc"], inner - pad_in * 2 - 70, 18)
+    h = 56 + 44 + len(lines) * 30 + 62
+    out = [module(P, top, inner, h, "U2")]
+
+    out.append(f'<text x="{P+pad_in}" y="{top+56}" font-size="{V["h1"]}" font-weight="700" '
+               f'fill="{INK}">{esc(c["work"]["name"])}</text>')
+    yy = top + 92
+    for ln in lines:
+        out.append(f'<text x="{P+pad_in}" y="{yy}" font-size="18" fill="{MUTED}">{esc(ln)}</text>')
+        yy += 30
+
+    yy += 12
+    x = P + pad_in
+    for t in c["work"]["tags"]:
+        w = tw(t.upper(), 10) * 1.4 + 26
+        out.append(f'<rect x="{x}" y="{yy}" width="{w}" height="24" fill="none" stroke="#2A4A66"/>')
+        out.append(f'<text x="{x+w/2}" y="{yy+16}" text-anchor="middle" class="mono" '
+                   f'style="fill:{BLUE}">{esc(t.upper())}</text>')
+        x += w + 10
+
+    out.append(f'<g transform="translate({W-P-56},{top+26})">'
+               f'<rect x="0" y="0" width="30" height="30" fill="none" stroke="{FRAME}"/>'
+               f'<path d="M9 21 L21 9 M12 9 H21 V18" fill="none" stroke="{ACCENT}" stroke-width="1.6"/></g>')
+
+    H = top + h + 40
+    return shell(W, H, header("03", "项目", "WORK", P, W) + "".join(out))
+
+
+def build_contact(c, V):
+    W, P = V["w"], V["pad"]
+    col = [P, P + 90, P + 300] if not V["stack"] else [P, P + 60, P + 200]
+    y = 140
+
+    out = [f'<text x="{col[0]}" y="{y}" class="mono">PIN</text>',
+           f'<text x="{col[1]}" y="{y}" class="mono">SIGNAL</text>',
+           f'<text x="{col[2]}" y="{y}" class="mono">VALUE</text>',
+           f'<line x1="{P}" y1="{y+12}" x2="{W-P}" y2="{y+12}" stroke="{FRAME}"/>']
+    y += 44
+    for i, item in enumerate(c["contact"]):
+        out.append(f'<text x="{col[0]}" y="{y}" font-family="Consolas,monospace" font-size="13" fill="{ACCENT}">'
+                   f'{i+1:02d}</text>')
+        out.append(f'<text x="{col[1]}" y="{y}" class="mono2" font-size="13" letter-spacing="2">{esc(item["k"])}</text>')
+        out.append(f'<text x="{col[2]}" y="{y}" font-family="Consolas,monospace" font-size="19" fill="{INK}">{esc(item["v"])}</text>')
+        y += 54
+        out.append(f'<line x1="{P}" y1="{y-24}" x2="{W-P}" y2="{y-24}" stroke="{FRAME}" opacity="0.55"/>')
+
+    H = y + 24
+    return shell(W, H, header("04", "联系", "CONTACT", P, W) + "".join(out))
 
 
 def main():
     c = json.loads((ROOT / "content.json").read_text(encoding="utf-8"))
     ASSETS.mkdir(exist_ok=True)
 
-    writers = {
-        "hero": build_hero,
-        "about": build_about,
-        "now": build_now,
-        "work": build_work,
-        "contact": build_contact,
-    }
+    writers = {"hero": build_hero, "about": build_about, "path": build_path,
+               "work": build_work, "contact": build_contact}
     for name, fn in writers.items():
         for variant, suffix in ((DESKTOP, ""), (MOBILE, "-mobile")):
             (ASSETS / f"{name}{suffix}.svg").write_text(fn(c, variant), encoding="utf-8")
 
     ver = hashlib.sha1((ROOT / "content.json").read_bytes()).hexdigest()[:6]
-    alts = {
-        "hero": f'{c["name"]} · {c["handle"]}',
-        "about": "关于我 ABOUT",
-        "now": "现在 NOW",
-        "work": f'项目 {c["work"]["name"]}',
-        "contact": "联系方式 CONTACT",
-    }
+    alts = {"hero": f'{c["name"]} · {c["handle"]}', "about": "关于我 ABOUT ME",
+            "path": "路径 PATH", "work": f'项目 {c["work"]["name"]}',
+            "contact": "联系方式 CONTACT"}
     parts = []
     for name in writers:
-        parts.append(
-            f'<div align="center">\n<picture>\n'
-            f'  <source media="(max-width: 640px)" srcset="assets/{name}-mobile.svg?v={ver}" />\n'
-            f'  <img width="100%" alt="{alts[name]}" src="assets/{name}.svg?v={ver}" />\n'
-            f'</picture>\n</div>\n')
-        header = "<!-- 此文件由 scripts/build.py 生成，请勿直接编辑。改文案请修改 content.json 后运行构建。 -->\n\n"
-    (ROOT / "README.md").write_text(header + "\n".join(parts), encoding="utf-8")
+        parts.append(f'<div align="center">\n<picture>\n'
+                     f'  <source media="(max-width: 640px)" srcset="assets/{name}-mobile.svg?v={ver}" />\n'
+                     f'  <img width="100%" alt="{alts[name]}" src="assets/{name}.svg?v={ver}" />\n'
+                     f'</picture>\n</div>\n')
+
+    note = "<!-- 此文件由 scripts/build.py 生成，请勿直接编辑。改文案请修改 content.json 后运行构建。 -->\n\n"
+    (ROOT / "README.md").write_text(note + "\n".join(parts), encoding="utf-8")
     print(f"built 10 svgs, version {ver}")
 
 

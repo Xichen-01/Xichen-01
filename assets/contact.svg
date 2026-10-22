@@ -1,40 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 384" width="1200" height="384"><defs>
-    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#0A1725"/>
-      <stop offset="1" stop-color="#08121D"/>
-    </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#5EEAD4"/>
-      <stop offset="0.55" stop-color="#38BDF8"/>
-      <stop offset="1" stop-color="#A78BFA"/>
-    </linearGradient>
-    <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#5EEAD4"/>
-      <stop offset="1" stop-color="#A78BFA"/>
-    </linearGradient>
-    <linearGradient id="pkt" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#38BDF8" stop-opacity="0"/>
-      <stop offset="0.7" stop-color="#38BDF8" stop-opacity="0.55"/>
-      <stop offset="1" stop-color="#A5F3FC" stop-opacity="0.95"/>
-    </linearGradient>
-    <style>
-      text { font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif; }
-      .label { font-size: 13px; font-weight: 600; letter-spacing: 3px; fill: #4F6B82; }
-      .body  { fill: #DCE7F0; }
-      .small { fill: #7E96AA; }
-      .k     { font-size: 15px; font-weight: 600; letter-spacing: 2.4px; fill: #4F6B82; }
-      .v     { fill: #C7D6E3; }
-      .h1    { font-weight: 700; fill: #F1F7FB; }
-      .tag   { font-size: 11px; font-weight: 600; letter-spacing: 1.4px; fill: #7DD3FC; }
-    </style>
-  </defs><rect x="0.5" y="0.5" width="1199" height="383" rx="16" fill="url(#panel)" stroke="#14304A"/><text x="72" y="76" class="label">04 — 联系 / CONTACT</text><rect x="72" y="96" width="36" height="2" fill="url(#accent)"/><text x="72" y="158" class="k">邮箱</text><text x="72" y="194" class="v" font-size="24" style="font-family:Consolas,monospace">your-email@example.com</text><line x1="72" y1="228" x2="1128" y2="228" stroke="#14304A"/><text x="72" y="254" class="k">GitHub</text><text x="72" y="290" class="v" font-size="24" style="font-family:Consolas,monospace">@Xichen-01</text>
-  <circle cx="1128" cy="70" r="3" fill="#5EEAD4">
-    <animate attributeName="opacity" values="0.2;0.95;0.2" dur="3.4s" repeatCount="indefinite"/>
-  </circle>
-  <circle cx="1128" cy="70" r="7" fill="#5EEAD4" opacity="0.18">
-    <animate attributeName="r" values="7;12;7" dur="3.4s" repeatCount="indefinite"/>
-  </circle>
-  <line x1="0" y1="383" x2="1200" y2="383" stroke="#12283C" stroke-width="1"/>
-  <rect x="0" y="382" width="110" height="2" fill="url(#pkt)" opacity="0.55">
-    <animate attributeName="x" values="-120;1200" dur="9s" repeatCount="indefinite"/>
-  </rect></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 316" width="1200" height="316"><defs>
+  <radialGradient id="lg" cx="0.12" cy="0.04" r="0.95">
+    <stop offset="0" stop-color="#5EEAD4" stop-opacity="0.065"/>
+    <stop offset="0.55" stop-color="#38BDF8" stop-opacity="0.02"/>
+    <stop offset="1" stop-color="#38BDF8" stop-opacity="0"/>
+  </radialGradient>
+  <pattern id="g1" width="24" height="24" patternUnits="userSpaceOnUse">
+    <path d="M24 0H0V24" fill="none" stroke="#0D1E2C" stroke-width="1"/>
+  </pattern>
+  <pattern id="g2" width="96" height="96" patternUnits="userSpaceOnUse">
+    <path d="M96 0H0V96" fill="none" stroke="#12293C" stroke-width="1"/>
+  </pattern>
+</defs><style>
+  text { font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif; }
+  .mono { font-family: Consolas, "JetBrains Mono", monospace; font-size: 13px; letter-spacing: 2.4px; fill: #5B7A90; }
+  .mono2 { font-family: Consolas, "JetBrains Mono", monospace; fill: #93A9BB; }
+</style><rect width="1200" height="316" fill="#04090F"/><rect width="1200" height="316" fill="url(#g1)" opacity="0.5"/><rect width="1200" height="316" fill="url(#g2)" opacity="0.45"/><rect width="1200" height="316" fill="url(#lg)"/><rect x="24" y="24" width="1152" height="268" fill="none" stroke="#254A62"/><path d="M24 36 V24 H36" fill="none" stroke="#2E5A78" stroke-width="1.5"/><path d="M1176 36 V24 H1164" fill="none" stroke="#2E5A78" stroke-width="1.5"/><path d="M24 280 V292 H36" fill="none" stroke="#2E5A78" stroke-width="1.5"/><path d="M1176 280 V292 H1164" fill="none" stroke="#2E5A78" stroke-width="1.5"/><rect x="72" y="38" width="32" height="32" fill="none" stroke="#254A62"/><text x="88" y="60" text-anchor="middle" font-size="14" fill="#5EEAD4" font-family="Consolas,monospace">04</text><text x="120" y="66" font-size="27" font-weight="700" fill="#DCE7F0">联系</text><text x="190.0" y="64" class="mono">CONTACT</text><line x1="72" y1="96" x2="1128" y2="96" stroke="#254A62"/><line x1="72" y1="92" x2="72" y2="100" stroke="#254A62"/><line x1="1128" y1="92" x2="1128" y2="100" stroke="#254A62"/><text x="72" y="140" class="mono">PIN</text><text x="162" y="140" class="mono">SIGNAL</text><text x="372" y="140" class="mono">VALUE</text><line x1="72" y1="152" x2="1128" y2="152" stroke="#254A62"/><text x="72" y="184" font-family="Consolas,monospace" font-size="13" fill="#5EEAD4">01</text><text x="162" y="184" class="mono2" font-size="13" letter-spacing="2">EMAIL</text><text x="372" y="184" font-family="Consolas,monospace" font-size="19" fill="#DCE7F0">your-email@example.com</text><line x1="72" y1="214" x2="1128" y2="214" stroke="#254A62" opacity="0.55"/><text x="72" y="238" font-family="Consolas,monospace" font-size="13" fill="#5EEAD4">02</text><text x="162" y="238" class="mono2" font-size="13" letter-spacing="2">GITHUB</text><text x="372" y="238" font-family="Consolas,monospace" font-size="19" fill="#DCE7F0">@Xichen-01</text><line x1="72" y1="268" x2="1128" y2="268" stroke="#254A62" opacity="0.55"/></svg>

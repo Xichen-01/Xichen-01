@@ -1,46 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 360" width="680" height="360">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#050A11"/><stop offset="0.58" stop-color="#07131F"/>
-      <stop offset="1" stop-color="#0A1A2A"/>
-    </linearGradient>
-    <radialGradient id="ga" cx="0.12" cy="0.14" r="0.55">
-      <stop offset="0" stop-color="#22D3EE" stop-opacity="0.18"/><stop offset="1" stop-color="#22D3EE" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="gb" cx="0.86" cy="0.8" r="0.6">
-      <stop offset="0" stop-color="#8B5CF6" stop-opacity="0.16"/><stop offset="1" stop-color="#8B5CF6" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#5EEAD4"/><stop offset="0.55" stop-color="#38BDF8"/><stop offset="1" stop-color="#A78BFA"/>
-    </linearGradient>
-    <linearGradient id="pkt" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#38BDF8" stop-opacity="0"/><stop offset="1" stop-color="#A5F3FC" stop-opacity="0.95"/>
-    </linearGradient>
-    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
-      <circle cx="1" cy="1" r="1" fill="#15304A" fill-opacity="0.55"/>
-    </pattern>
-    <style>
-      text { font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif; }
-      .lbl { font-size: 12px; font-weight: 600; letter-spacing: 3px; fill: #4F6B82; }
-    </style>
-  </defs>
-  <rect width="680" height="360" fill="url(#bg)"/>
-  <rect width="680" height="360" fill="url(#dots)" opacity="0.45"/>
-  <rect width="680" height="360" fill="url(#ga)"/>
-  <rect width="680" height="360" fill="url(#gb)"/>
-  <rect x="0" width="680" height="2" fill="url(#pkt)" opacity="0.35">
-    <animate attributeName="y" values="-2;360" dur="7s" repeatCount="indefinite"/>
-  </rect>
-  <text x="36" y="64" class="lbl">PROFILE / 2026</text>
-  <text x="644" y="64" class="lbl" text-anchor="end">AI × SOFTWARE</text>
-  <text x="34" y="190" font-size="66" font-weight="700" letter-spacing="6" fill="#F2F7FB">李天成</text>
-  <text x="36" y="234" font-size="14" font-weight="500" letter-spacing="5" fill="#7E96AA">LI TIANCHENG</text>
-  <rect x="36" y="264" width="240" height="1" fill="#17334C"/>
-  <text x="36" y="302" font-size="15" fill="#5EEAD4" font-family="Consolas,monospace">@Xichen-01</text>
-  <text x="36" y="338" font-size="16" fill="#7E96AA" letter-spacing="1.5">智能科学与技术 · 2026 级</text>
-  
-  <line x1="0" y1="359" x2="680" y2="359" stroke="#12283C"/>
-  <rect x="0" y="357" width="90" height="2" fill="url(#pkt)" opacity="0.8">
-    <animate attributeName="x" values="-120;680" dur="6s" repeatCount="indefinite"/>
-  </rect>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 400" width="680" height="400"><defs>
+  <radialGradient id="lg" cx="0.12" cy="0.04" r="0.95">
+    <stop offset="0" stop-color="#5EEAD4" stop-opacity="0.065"/>
+    <stop offset="0.55" stop-color="#38BDF8" stop-opacity="0.02"/>
+    <stop offset="1" stop-color="#38BDF8" stop-opacity="0"/>
+  </radialGradient>
+  <pattern id="g1" width="24" height="24" patternUnits="userSpaceOnUse">
+    <path d="M24 0H0V24" fill="none" stroke="#0D1E2C" stroke-width="1"/>
+  </pattern>
+  <pattern id="g2" width="96" height="96" patternUnits="userSpaceOnUse">
+    <path d="M96 0H0V96" fill="none" stroke="#12293C" stroke-width="1"/>
+  </pattern>
+</defs><style>
+  text { font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif; }
+  .mono { font-family: Consolas, "JetBrains Mono", monospace; font-size: 13px; letter-spacing: 2.4px; fill: #5B7A90; }
+  .mono2 { font-family: Consolas, "JetBrains Mono", monospace; fill: #93A9BB; }
+</style><rect width="680" height="400" fill="#04090F"/><rect width="680" height="400" fill="url(#g1)" opacity="0.5"/><rect width="680" height="400" fill="url(#g2)" opacity="0.45"/><rect width="680" height="400" fill="url(#lg)"/><rect x="24" y="24" width="632" height="352" fill="none" stroke="#254A62"/><path d="M24 36 V24 H36" fill="none" stroke="#2E5A78" stroke-width="1.5"/><path d="M656 36 V24 H644" fill="none" stroke="#2E5A78" stroke-width="1.5"/><path d="M24 364 V376 H36" fill="none" stroke="#2E5A78" stroke-width="1.5"/><path d="M656 364 V376 H644" fill="none" stroke="#2E5A78" stroke-width="1.5"/><text x="36" y="62" class="mono">DIGITAL IDENTITY / 2026</text><text x="644" y="62" class="mono" text-anchor="end">SHEET 01 / 05</text><text x="32" y="200" font-size="64" font-weight="700" letter-spacing="7" fill="#DCE7F0">李天成</text><line x1="36" y1="236" x2="242.0" y2="236" stroke="#2E5A78"/><line x1="36" y1="231" x2="36" y2="241" stroke="#2E5A78"/><line x1="242.0" y1="231" x2="242.0" y2="241" stroke="#2E5A78"/><text x="139.0" y="228" text-anchor="middle" class="mono">1:1</text><text x="36" y="282" class="mono2" font-size="13" letter-spacing="5">LI TIANCHENG</text><line x1="36" y1="308" x2="286" y2="308" stroke="#254A62"/><text x="36" y="348" font-family="Consolas,monospace" font-size="14" fill="#5EEAD4">@Xichen-01</text><text x="36" y="390" font-size="15" fill="#93A9BB">在 AI 时代探索更多可能</text><text x="36" y="418" font-size="13" fill="#546B80">Exploring more possibilities in the AI era.</text><rect x="0" y="0" width="680" height="2" fill="#5EEAD4" opacity="0.25"><animate attributeName="y" values="0;400" dur="9s" repeatCount="indefinite"/></rect></svg>

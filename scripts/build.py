@@ -475,6 +475,17 @@ def main():
             out.append(f'<sub>{lnks}</sub>')
         out.append("\n</details>\n")
 
+    out.append('<div align="center">')
+    out.append('<picture>')
+    out.append('  <source media="(prefers-color-scheme: dark)" '
+               'srcset="https://raw.githubusercontent.com/Xichen-01/Xichen-01/output/github-snake-dark.svg" />')
+    out.append('  <img width="100%" alt="contribution snake" '
+               'src="https://raw.githubusercontent.com/Xichen-01/Xichen-01/output/github-snake.svg" />')
+    out.append('</picture>')
+    out.append('</div>')
+    out.append('')
+    out.append('<div align="center"><sub>CONTRIBUTION SIGNAL　·　LAST 12 MONTHS</sub></div>')
+
     (ROOT / "README.md").write_text("\n".join(out), encoding="utf-8")
     print(f"built station {ver}")
 
